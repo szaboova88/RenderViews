@@ -122,9 +122,6 @@
             }
         }.bind(self));
 
-        if (id == shape.relations.seed)
-            alert("same seed-shape id");
-
         //Add the subscription to the subscriptions map for the given shape, note that again we use an object to possibly store several subscriptions per shape
         if (id in this.Subscriptions)
             this.Subscriptions[id].pick = pickSubscription;
