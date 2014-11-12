@@ -1,0 +1,1 @@
+RenderWidgets.AddRenderer(new InteractiveThreeRenderer('#basicRendererContainer'));
