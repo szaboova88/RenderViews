@@ -25,28 +25,28 @@ function AbstractRenderer(domQuery) { //for whole window call with domQuery "<bo
 
     result.EnableShape = function (shape) {
         for (var i = 0, l = this.enableCalls.length; i < l; i++) {
-            this.enableCalls[i].apply(this, shape);
+            this.enableCalls[i].call(this, shape);
         }
         this.render();
     }
 
     result.DisableShape = function (shape) {
         for (var i = 0, l = this.disableCalls.length; i < l; i++) {
-            this.disableCalls[i].apply(this, shape);
+            this.disableCalls[i].call(this, shape);
         }
         this.render();
     }
 
     result.render = function () {
         for (var i = 0, l = this.renderCalls.length; i < l; i++) {
-            this.renderCalls[i].apply(this);
+            this.renderCalls[i].call(this);
         }
     }
 
     //called once per frame, executes all updates and renders the result
     result.animate = function () {
         for (var i = 0, l = this.updateCalls.length; i < l; i++) {
-            this.updateCalls[i].apply(this);
+            this.updateCalls[i].call(this);
         }
         this.render();
 
@@ -55,7 +55,7 @@ function AbstractRenderer(domQuery) { //for whole window call with domQuery "<bo
 
     result.Init = function () {
         for (var i = 0, l = this.initCalls.length; i < l; i++) {
-            this.initCalls[i].apply(this);
+            this.initCalls[i].call(this);
         }
         this.animate();
     }
