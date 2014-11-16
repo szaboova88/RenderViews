@@ -4,7 +4,7 @@
 
     self.IsInitialized = function () {
         window.console&&console.log('Just loaded');
-        return false;
+        return true;
     }
     
     return self;
