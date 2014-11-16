@@ -2,9 +2,10 @@
     //inherit the base class
     var self = AbstractRenderer(domQuery);
 
-    self.initCalls.push(function () {
+    self.IsInitialized = function () {
         window.console&&console.log('Just loaded');
-    });
+        return true;
+    }
     
     return self;
 }
