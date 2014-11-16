@@ -3,7 +3,7 @@
     var self = AbstractRenderer(domQuery);
 
     self.IsInitialized = function () {
-        alert('Just loaded');
+        window.console&&console.log('Just loaded');
         return false;
     }
     
