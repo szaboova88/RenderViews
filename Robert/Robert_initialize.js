@@ -1,7 +1,3 @@
-function MyRenderer(domQuery)
-{
-    var self = BasicThreeRenderer(domQuery);
-    return self;
-}
-
+RenderWidgets.AddRenderer(new BasicThreeRenderer('#basicRendererContainer'));
+RenderWidgets.AddRenderer(new GraphRenderer('#graphRendererContainer'));
 
