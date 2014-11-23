@@ -1,3 +1,3 @@
-RenderWidgets.AddRenderer(new MyRenderer ('#MyRendererContainer'));
-RenderWidgets.AddRenderer(new GraphRenderer('#graphRendererContainer'));
+RenderWidgets.AddRenderer(new MyRenderer ('#basicRendererContainer'));
+
 
