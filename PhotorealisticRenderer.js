@@ -10,11 +10,7 @@ function PhotorealisticRenderer(domQuery) {
     self.camera = null;
     self.shadowMapEnabled = true;
         
-    return self;
-}
-
-
-self.initCalls.push(function () {
+    self.initCalls.push(function () {
         //get the object matching the container query
         var query = $(this.containerQuery);
         if (query.length == 1) //There must be exactly one result to the query
@@ -97,3 +93,5 @@ self.initCalls.push(function () {
           	return light;
             }
     });
+    return self;
+}
