@@ -1,3 +1,3 @@
-RenderWidgets.AddRenderer(new MyRenderer ('#basicRendererContainer'));
+RenderWidgets.AddRenderer(new PhotorealisticRenderer ('#basicRendererContainer'));
 
 
