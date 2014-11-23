@@ -1,4 +1,4 @@
-function MyRenderer(domQuery)
+function PhotorealisticRenderer(domQuery)
 {
     var self = BasicThreeRenderer(domQuery);
     self.shadowMapEnabled = true;
