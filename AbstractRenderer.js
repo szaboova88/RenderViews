@@ -23,14 +23,14 @@ function AbstractRenderer(domQuery) { //for whole window call with domQuery "<bo
         return false;
     }
 
-    result.EnableShape = function (shape) {
+    result.EnableSeed = function (shape) {
         for (var i = 0, l = this.enableCalls.length; i < l; i++) {
             this.enableCalls[i].call(this, shape);
         }
         this.render();
     }
 
-    result.DisableShape = function (shape) {
+    result.DisableSeed = function (shape) {
         for (var i = 0, l = this.disableCalls.length; i < l; i++) {
             this.disableCalls[i].call(this, shape);
         }
@@ -74,6 +74,17 @@ function AbstractRenderer(domQuery) { //for whole window call with domQuery "<bo
         this.render();
     }
 
+    result.addsubscription = function (id, name, callback) {
+        if (result.Subscriptions.hasOwnProperty(id)) {
+            result.Subscriptions[id][name] = callback;
+        }
+        else {
+            var obj = {};
+            obj[name] = callback;
+            result.Subscriptions[id] = obj;
+        }
+    }
+
     //When a new seed is added the renderer subscribes to its shapes storage here, so that it will be notified on any further modificatioins
     result.AddSeedSubscription = function (self, seed) {
         //A new subscription for the shapes observable array is created
@@ -99,7 +110,7 @@ function AbstractRenderer(domQuery) { //for whole window call with domQuery "<bo
         //Also a new subscription for the on/off switch of the seed is created
         var onOffSubscription = seed.Enabled_bool.subscribe(function (enabled) {
             ko.utils.arrayForEach(seed.Shapes(), function (shape) {
-                enabled ? self.EnableShape(shape) : self.DisableShape(shape);
+                enabled ? self.EnableSeed(shape) : self.DisableSeed(shape);
             });
         });
 
