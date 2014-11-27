@@ -1,2 +1,1 @@
-RenderWidgets.AddRenderer(new BasicThreeRenderer('#basicRendererContainer'));
-RenderWidgets.AddRenderer(new GraphRenderer('#graphRendererContainer'));
+RenderWidgets.AddRenderer(new IllustrativeRenderer('#basicRendererContainer'));
