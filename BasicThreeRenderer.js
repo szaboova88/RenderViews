@@ -144,7 +144,16 @@
         mesh.overdraw = true;
         mesh.name = id; //this will help us to recover the shape object when a mesh is picked by the mouse
 
-        this.scene.add(mesh); //the created mesh is added to the scene
+        //add the created mesh to the scene only if it is visible
+        //TODO this should be better done in a lazy way, so that the mesh is created and stored in the map of meshes first after the mesh becomes visible first
+        if (shape.interaction.visible()) 
+            this.scene.add(mesh); //the created mesh is added to the scene
+        
+        //a subscription to the visible property is created and added to the list of subscriptions
+        visCallback = shape.interaction.visible.subscribe(function (newValue) {
+            newValue ? this.scene.add(this.Meshes[id]) : this.scene.remove(this.Meshes[id]);
+        }, this);
+        this.addsubscription(id, "visible", visCallback);
 
         this.Meshes[id] = mesh; //remember the mesh also in the map of meshes
         this.Seeds[id] = shape.relations.seed; //remeber the backward relation of shapeID to seedID
@@ -154,6 +163,11 @@
     self.removeCalls.push(function (shape)
     {
         var id = shape.id;
+        if (id in this.Subscriptions) {
+            for (t in this.Subscriptions[id])
+                this.Subscriptions[id][t].dispose();
+            delete this.Subscriptions[id];
+        }
         if (id in this.Meshes) {
             this.scene.remove(this.Meshes[id]); //remove the mesh from the scene
             //TODO there is something wrong about these calls
