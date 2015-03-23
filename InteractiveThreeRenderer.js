@@ -64,6 +64,7 @@
     self.picked = null;
     //material wich substitutes the default mesh material when a mesh is picked
     self.pickedMaterial = new THREE.MeshBasicMaterial({ color: 'green', blending: THREE.NoBlending });
+    self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
 
     //At last we add a new update method
     self.updateCalls.push(function () {
@@ -128,6 +129,9 @@
                     this.picked = intersects[0].object;
                     //The same as above but compressed into a single line
                     SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
+                    for (s in shape) {
+                        s = notpickedMaterial;
+                    }
                 }
             }
             else //There are no intersections
