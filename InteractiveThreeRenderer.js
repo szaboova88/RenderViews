@@ -156,11 +156,11 @@
                 if (newVal) {
                     if (!mesh.defaultMaterial) //if it has no defaultMaterial stored yet, backup the current material
                         mesh.defaultMaterial = mesh.material;
-                    mesh.material = this.notpickedMaterial; //assign it the picked material
+                    mesh.material = mesh.defaultMaterial;//this.pickedMaterial; //assign it the picked material
                     //TODO STUDENTS this will not work once selection and highlighting are worging, as the materials would easily overwrite each other.
                 }
                 else {
-                    mesh.material = mesh.defaultMaterial; //if the picking just ended, assign back the default material
+                    mesh.material = this.pickedMaterial; //mesh.defaultMaterial; //if the picking just ended, assign back the default material
                     //TODO STUDENTS this won't work either
                 }
             }
