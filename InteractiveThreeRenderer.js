@@ -64,7 +64,7 @@
     self.picked = null;
     //material wich substitutes the default mesh material when a mesh is picked
     self.pickedMaterial = new THREE.MeshBasicMaterial({ color: 'green', blending: THREE.NoBlending });
-    self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
+    //self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
 
     //At last we add a new update method
     self.updateCalls.push(function () {
@@ -129,9 +129,9 @@
                     this.picked = intersects[0].object;
                     //The same as above but compressed into a single line
                     SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
-                    for (s in shape) {
-                        s = notpickedMaterial;
-                    }
+                    //for (s in shape) {
+                       // s = notpickedMaterial;
+                    //}
                 }
             }
             else //There are no intersections
@@ -156,11 +156,11 @@
                 if (newVal) {
                     if (!mesh.defaultMaterial) //if it has no defaultMaterial stored yet, backup the current material
                         mesh.defaultMaterial = mesh.material;
-                    mesh.material = this.pickedMaterial; //assign it the picked material
+                    mesh.material = mesh.defaultMaterial //this.pickedMaterial; //assign it the picked material
                     //TODO STUDENTS this will not work once selection and highlighting are worging, as the materials would easily overwrite each other.
                 }
                 else {
-                    mesh.material = mesh.defaultMaterial; //if the picking just ended, assign back the default material
+                    mesh.material = this.pickedMaterial //mesh.defaultMaterial; //if the picking just ended, assign back the default material
                     //TODO STUDENTS this won't work either
                 }
             }
