@@ -139,14 +139,14 @@
             }
             else //There are no intersections
             {
+                for (i in this.Meshes) {
+                        this.Meshes[i].material = this.defaultMaterial;
+                }
                 //Use Knockout to unset the picked state of the shape
                 if (this.picked)
                     SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(false);
                 //Remove previous intersection mesh reference by setting current intersection object to null
                 this.picked = null;
-                /*for (i in this.Meshes) {
-                        this.Meshes[i].material = this.defaultMaterial;
-                }*/
             }
             /**/
         }
