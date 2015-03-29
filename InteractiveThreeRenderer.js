@@ -63,7 +63,7 @@
     //reference to the mesh being currently picked; null if none
     self.picked = null;
     //material wich substitutes the default mesh material when a mesh is picked
-    self.pickedMaterial = new THREE.MeshBasicMaterial({ color: 'blue', blending: THREE.NoBlending });
+    self.pickedMaterial = new THREE.MeshBasicMaterial({ color: 'yellow', blending: THREE.NoBlending });
     self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
 
     //At last we add a new update method
@@ -129,9 +129,7 @@
                     this.picked = intersects[0].object;
                     //The same as above but compressed into a single line
                     SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
-                    //for (s in shape) {
-                       // s = notpickedMaterial;
-                    //}
+                    
                 }
             }
             else //There are no intersections
@@ -141,6 +139,9 @@
                     SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(false);
                 //Remove previous intersection mesh reference by setting current intersection object to null
                 this.picked = null;
+                for (i in this.Meshes) {
+                        this.Meshes[i].material = this.notpickedMaterial;
+                    }
             }
             /**/
         }
