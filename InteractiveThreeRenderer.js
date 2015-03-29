@@ -63,7 +63,7 @@
     //reference to the mesh being currently picked; null if none
     self.picked = null;
     //material wich substitutes the default mesh material when a mesh is picked
-    self.pickedMaterial = new THREE.MeshBasicMaterial({ color: 'yellow', blending: THREE.NoBlending });
+    self.pickedMaterial = new THREE.MeshBasicMaterial({ color: 'white', blending: THREE.NoBlending });
     self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
 
     //At last we add a new update method
@@ -130,6 +130,9 @@
                     //The same as above but compressed into a single line
                     SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
                     for (i in this.Meshes) {
+                        if(this.Meshes[i] == this.picked){
+                            return;
+                        }
                         this.Meshes[i].material = this.notpickedMaterial;
                     }
                     
@@ -167,7 +170,7 @@
                     //TODO STUDENTS this will not work once selection and highlighting are worging, as the materials would easily overwrite each other.
                 }
                 else {
-                    mesh.material = this.notpickedMaterial;//mesh.defaultMaterial; //if the picking just ended, assign back the default material
+                    mesh.material = mesh.defaultMaterial; //if the picking just ended, assign back the default material
                     //TODO STUDENTS this won't work either
                 }
             }
