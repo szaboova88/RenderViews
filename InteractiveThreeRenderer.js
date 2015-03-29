@@ -145,9 +145,9 @@
                     SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(false);
                 //Remove previous intersection mesh reference by setting current intersection object to null
                 this.picked = null;
-                for (i in this.Meshes) {
-                        this.Meshes[i].material = this.defaultMaterial;
-                    }
+                //for (i in this.Meshes) {
+                //        this.Meshes[i].material = this.defaultMaterial;
+                //    }
             }
             /**/
         }
