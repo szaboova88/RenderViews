@@ -147,7 +147,7 @@
                 this.picked = null;
                 /*for (i in this.Meshes) {
                         this.Meshes[i].material = this.defaultMaterial;
-                */    }
+                    }*/
             }
             /**/
         }
