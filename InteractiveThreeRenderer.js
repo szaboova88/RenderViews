@@ -118,18 +118,18 @@
                 if (intersects[0].object != this.picked) {
                     //Restore previous intersection mash (if anything was picked before) to its original material
                     if (this.picked) {
+                        for (i in this.Meshes) {
+                            if(this.Meshes[i] == this.picked){
+                            return;
+                            }
+                        this.Meshes[i].material = this.notpickedMaterial;
+                        }
                         var shapeID = this.picked.name;
                         var seedID = this.Seeds[shapeID];
                         var seed = SeedWidgets.GetById(seedID);
                         var shape = seed.GetShape(shapeID);
                         //Use Knockout to unset the picked state of the shape
                         shape.interaction.picked(false);
-                    }
-                    for (i in this.Meshes) {
-                        if(this.Meshes[i] == this.picked){
-                            return;
-                        }
-                        this.Meshes[i].material = this.notpickedMaterial;
                     }
                     //Store reference to closest mesh as current intersection mesh
                     this.picked = intersects[0].object;
