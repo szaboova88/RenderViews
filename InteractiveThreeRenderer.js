@@ -126,9 +126,9 @@
                         shape.interaction.picked(false);
                     }
                     for (i in this.Meshes) {
-                        //if(this.Meshes[i] == this.picked){
-                        //    return;
-                        //}
+                        if(this.Meshes[i] == this.picked){
+                            return;
+                        }
                         this.Meshes[i].material = this.notpickedMaterial;
                     }
                     //Store reference to closest mesh as current intersection mesh
