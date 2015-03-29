@@ -147,7 +147,7 @@
                 this.picked = null;
                 /*for (i in this.Meshes) {
                         this.Meshes[i].material = this.defaultMaterial;
-                    }*/
+                }*/
             }
             /**/
         }
@@ -162,9 +162,6 @@
             if (mesh) {
                 if (newVal) {
                     if (!mesh.defaultMaterial) //if it has no defaultMaterial stored yet, backup the current material
-                    //for (i in this.Meshes) {
-                    //    this.Meshes[i] = this.notpickedMaterial;
-                    //}
                         mesh.defaultMaterial = mesh.material;
                     mesh.material = this.pickedMaterial; //assign it the picked material
                     //TODO STUDENTS this will not work once selection and highlighting are worging, as the materials would easily overwrite each other.
