@@ -63,7 +63,7 @@
     //reference to the mesh being currently picked; null if none
     self.picked = null;
     //material wich substitutes the default mesh material when a mesh is picked
-    self.pickedMaterial = new THREE.MeshBasicMaterial({ color: 'green', blending: THREE.NoBlending });
+    self.pickedMaterial = new THREE.MeshBasicMaterial({ color: 'yellow', blending: THREE.NoBlending });
     self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
 
     //At last we add a new update method
@@ -139,8 +139,8 @@
             }
             else //There are no intersections
             {
-                for (i in this.Meshes) {
-                        this.Meshes[i].material = mesh.defaultMaterial;
+                for (i in Meshes) {
+                        Meshes[i].material = mesh.defaultMaterial;
                 }
                 //Use Knockout to unset the picked state of the shape
                 if (this.picked)
