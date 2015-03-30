@@ -141,8 +141,7 @@
             else //There are no intersections
             {
                 for (i in this.Meshes) {
-                    mesh.material = mesh.defaultMaterial;
-                    this.Meshes[i].material = mesh.material;
+                    this.Meshes[i].material = this.newMaterial;
                     }
                 //Use Knockout to unset the picked state of the shape
                 if (this.picked)
@@ -171,7 +170,8 @@
                     //TODO STUDENTS this will not work once selection and highlighting are worging, as the materials would easily overwrite each other.
                 }
                 else {
-                    mesh.material = mesh.defaultMaterial; //if the picking just ended, assign back the default material
+                    return;
+                    //mesh.material = mesh.defaultMaterial; //if the picking just ended, assign back the default material
                     //TODO STUDENTS this won't work either
                 }
             }
