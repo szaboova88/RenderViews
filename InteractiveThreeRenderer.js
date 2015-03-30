@@ -141,7 +141,7 @@
             else //There are no intersections
             {
                 for (i in this.Meshes) {
-                        this.Meshes[i].material = this.newMaterial;
+                        this.Meshes[i].material = mesh.material;
                     }
                 //Use Knockout to unset the picked state of the shape
                 if (this.picked)
