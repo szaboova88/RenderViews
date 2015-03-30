@@ -63,7 +63,7 @@
     //reference to the mesh being currently picked; null if none
     self.picked = null;
     //material wich substitutes the default mesh material when a mesh is picked
-    self.pickedMaterial = new THREE.MeshBasicMaterial({ color: 'green', blending: THREE.NoBlending });
+    self.pickedMaterial = new THREE.MeshBasicMaterial({ color: 'red', blending: THREE.NoBlending });
     self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
     self.mybasicMaterial = new THREE.MeshNormalMaterial();
 
@@ -162,12 +162,13 @@
                     if (!mesh.defaultMaterial) //if it has no defaultMaterial stored yet, backup the current material
                         mesh.defaultMaterial = mesh.material;
                     mesh.material = this.pickedMaterial; 
-                    for (i in this.Meshes) {
+                    /*for (i in this.Meshes) {
                             if(this.Meshes[i] == this.picked){
                             return;
                             }
                         this.Meshes[i].material = this.notpickedMaterial;
-                }//assign it the picked material
+                }*/
+                //assign it the picked material
                     //TODO STUDENTS this will not work once selection and highlighting are worging, as the materials would easily overwrite each other.
                 }
                 else {
