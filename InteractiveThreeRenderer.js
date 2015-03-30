@@ -129,6 +129,13 @@
                     }
                     //Store reference to closest mesh as current intersection mesh
                     this.picked = intersects[0].object;
+                    
+                    for (i in this.Meshes) {
+                            if(this.Meshes[i] == this.picked){
+                                return;
+                            }
+                        this.Meshes[i].material = this.notpickedMaterial;
+                    }
                     //The same as above but compressed into a single line
                     SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
                 }
@@ -162,13 +169,7 @@
                     if (!mesh.defaultMaterial) //if it has no defaultMaterial stored yet, backup the current material
                         mesh.defaultMaterial = mesh.material;
                     mesh.material = this.pickedMaterial; 
-                    /*
-                    for (i in this.Meshes) {
-                            if(this.Meshes[i] == this.picked){
-                                return;
-                            }
-                        this.Meshes[i].material = this.notpickedMaterial;
-                    }*/
+                    /**/
                 //assign it the picked material
                     //TODO STUDENTS this will not work once selection and highlighting are worging, as the materials would easily overwrite each other.
                 }
