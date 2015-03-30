@@ -128,16 +128,14 @@
                     }
                     //Store reference to closest mesh as current intersection mesh
                     this.picked = intersects[0].object;
-                    
-                    
-                for (i in this.Meshes) {
+                    //The same as above but compressed into a single line
+                    SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true); 
+                    for (i in this.Meshes) {
                             if(this.Meshes[i] == this.picked){
-                            return;
+                                return;
                             }
                         this.Meshes[i].material = this.notpickedMaterial;
-                }
-                    //The same as above but compressed into a single line
-                    SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
+                    }
                 }
             }
             else //There are no intersections
