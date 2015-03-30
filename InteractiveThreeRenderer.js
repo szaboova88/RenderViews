@@ -132,7 +132,7 @@
                     
                     for (i in this.Meshes) {
                             if(this.Meshes[i] == this.picked){
-                                return;
+                                this.picked.material = this.pickedMaterial;
                             }
                         this.Meshes[i].material = this.notpickedMaterial;
                     }
