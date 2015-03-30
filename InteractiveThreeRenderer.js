@@ -116,7 +116,7 @@
             ///////// THIS ALTERNATIVE USES THE KNOCKOUT BINDING        
             if (intersects.length > 0) {
                     for (i in this.Meshes) {
-                            if(this.Meshes[i] == this.picked){
+                            if(this.Meshes[i] == intersects[0].object){
                             return;
                             }
                         this.Meshes[i].material = this.notpickedMaterial;
