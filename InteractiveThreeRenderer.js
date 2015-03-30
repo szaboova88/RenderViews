@@ -65,7 +65,7 @@
     //material wich substitutes the default mesh material when a mesh is picked
     self.pickedMaterial = new THREE.MeshBasicMaterial({ color: 'blue', blending: THREE.NoBlending });
     self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
-    self.newMaterial = new THREE.MeshBasicMaterial({ color: 'red', blending: THREE.NoBlending });
+    self.newMaterial = new THREE.MeshBasicMaterial({ color: 'yellow', blending: THREE.NoBlending });
 
     //At last we add a new update method
     self.updateCalls.push(function () {
