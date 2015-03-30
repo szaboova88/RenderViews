@@ -115,6 +115,12 @@
 
             ///////// THIS ALTERNATIVE USES THE KNOCKOUT BINDING        
             if (intersects.length > 0) {
+                for (i in this.Meshes) {
+                            if(this.Meshes[i] == this.picked){
+                            return;
+                            }
+                        this.Meshes[i].material = this.notpickedMaterial;
+                }
                 //If the closest mesh intersected is not the currently stored intersection (i.e. picked) mesh
                 if (intersects[0].object != this.picked) {
                     //Restore previous intersection mash (if anything was picked before) to its original material
@@ -131,7 +137,6 @@
                     //The same as above but compressed into a single line
                     SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
                 }
-                
             }
             else //There are no intersections
             {
@@ -162,12 +167,7 @@
                     if (!mesh.defaultMaterial) //if it has no defaultMaterial stored yet, backup the current material
                         mesh.defaultMaterial = mesh.material;
                     mesh.material = this.pickedMaterial; 
-                    /*for (i in this.Meshes) {
-                            if(this.Meshes[i] == this.picked){
-                            return;
-                            }
-                        this.Meshes[i].material = this.notpickedMaterial;
-                }*/
+                    /**/
                 //assign it the picked material
                     //TODO STUDENTS this will not work once selection and highlighting are worging, as the materials would easily overwrite each other.
                 }
