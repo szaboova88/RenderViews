@@ -116,7 +116,13 @@
             ///////// THIS ALTERNATIVE USES THE KNOCKOUT BINDING        
             if (intersects.length > 0) {
                 //If the closest mesh intersected is not the currently stored intersection (i.e. picked) mesh
-                if (intersects[0].object != this.picked) {
+                if (intersects[0].object != this.picked) { 
+                    for (i in this.Meshes) {
+                            if(this.Meshes[i] == this.picked){
+                                return;
+                            }
+                        this.Meshes[i].material = this.notpickedMaterial;
+                    }
                     //Restore previous intersection mash (if anything was picked before) to its original material
                     if (this.picked) {
                         var shapeID = this.picked.name;
@@ -129,13 +135,7 @@
                     //Store reference to closest mesh as current intersection mesh
                     this.picked = intersects[0].object;
                     //The same as above but compressed into a single line
-                    SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true); 
-                    for (i in this.Meshes) {
-                            if(this.Meshes[i] == this.picked){
-                                return;
-                            }
-                        this.Meshes[i].material = this.notpickedMaterial;
-                    }
+                    SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
                 }
             }
             else //There are no intersections
