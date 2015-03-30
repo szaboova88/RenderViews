@@ -63,8 +63,8 @@
     //reference to the mesh being currently picked; null if none
     self.picked = null;
     //material wich substitutes the default mesh material when a mesh is picked
-    var color1 = new THREE.Color(0x660000);
-    self.pickedMaterial = new THREE.MeshBasicMaterial({ color: color1, blending: THREE.NoBlending });
+    var color = new THREE.Color("rgb(255,0,0)");
+    self.pickedMaterial = new THREE.MeshBasicMaterial({ color, blending: THREE.NoBlending });
     self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
     self.mybasicMaterial = new THREE.MeshNormalMaterial();
 
