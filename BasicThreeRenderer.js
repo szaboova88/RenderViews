@@ -144,9 +144,9 @@
         //Compute normals for the mesh
         geo.computeFaceNormals();
 //////////////////////////////////////////////////////////////////////////////////////////////////
-        //var ambiColor = "#0c0c0c";
-        //var ambientLight = new THREE.AmbientLight(ambiColor);
-        //this.scene.add(ambientLight);
+        var ambiColor = "#0c0c0c";
+        var ambientLight = new THREE.AmbientLight(ambiColor);
+        this.scene.add(ambientLight);
         
         var spotLight = new THREE.SpotLight( 0xffffff );
         spotLight.position.set( -40, 60, -10 );
