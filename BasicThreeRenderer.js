@@ -85,8 +85,8 @@
             this.renderer.setClearColorHex(0xffffff, 1); //white
             //Our main scene
             this.scene = new THREE.Scene();
-            var ambientLight = new THREE.AmbientLight(0x0c0c0c);
-            this.scene.add(ambientLight);
+            //var ambientLight = new THREE.AmbientLight(0x0c0c0c);
+            //this.scene.add(ambientLight);
 
             //Plane for testing in case there are some problems receiving or processing the server data
             //var plane = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), new THREE.MeshNormalMaterial());
