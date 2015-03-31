@@ -60,9 +60,9 @@
         }
     }
 
-    var ambiColor = "#0c0c0c";
+    /*var ambiColor = "#0c0c0c";
     var ambientLight = new THREE.AmbientLight(ambiColor);
-    this.scene.add(ambientLight);
+    this.scene.add(ambientLight);*/
     //reference to the mesh being currently picked; null if none
     self.picked = null; //material wich substitutes the default mesh material when a mesh is picked
     
@@ -70,8 +70,8 @@
     self.mybasicMaterial = new THREE.MeshNormalMaterial();
     
     //self.notpickedMaterial = new THREE.MeshNormalMaterial({color: 0x000000});
-    self.notpickedMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
-    //self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
+    //self.notpickedMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
+    self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
     //self.notpickedMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
 
     //At last we add a new update method
