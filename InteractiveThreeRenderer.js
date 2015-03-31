@@ -60,9 +60,9 @@
         }
     }
 
-            /*var ambiColor = "#0c0c0c";
-            var ambientLight = new THREE.AmbientLight(ambiColor);
-            this.scene.add(ambientLight);*/
+    var ambiColor = "#0c0c0c";
+    var ambientLight = new THREE.AmbientLight(ambiColor);
+    this.scene.add(ambientLight);
     //reference to the mesh being currently picked; null if none
     self.picked = null; //material wich substitutes the default mesh material when a mesh is picked
     
