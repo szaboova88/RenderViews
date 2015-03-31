@@ -144,13 +144,17 @@
         //Compute normals for the mesh
         geo.computeFaceNormals();
 //////////////////////////////////////////////////////////////////////////////////////////////////
-        var ambiColor = "#0c0c0c";
-        var ambientLight = new THREE.AmbientLight(ambiColor);
-        this.scene.add(ambientLight);
+        //var ambiColor = "#0c0c0c";
+        //var ambientLight = new THREE.AmbientLight(ambiColor);
+        //this.scene.add(ambientLight);
         
+        var spotLight = new THREE.SpotLight( 0xffffff );
+        spotLight.position.set( -40, 60, -10 );
+        this.scene.add( spotLight );
 //////////////////////////////////////////////////////////////////////////////////////////////////        
         //In this bsic renderer, since there are no lights we use a material coloring the vertices according to their normal
-        var mat = new THREE.MeshNormalMaterial();
+        //var mat = new THREE.MeshNormalMaterial();
+        var mat = new THREE.MeshLambertMaterial({color: 0xffffff});
         //mat.side = THREE.DoubleSide; //render also when the orientation of the triangles is wrong (i.e. their normal points in the same half-dome as the viewing vector)
         var mesh = new THREE.Mesh(geo, mat);
         mesh.overdraw = true;
