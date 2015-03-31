@@ -87,10 +87,10 @@
             this.scene = new THREE.Scene();
             var ambiColor = "#0c0c0c";
             var ambientLight = new THREE.AmbientLight(ambiColor);
-            scene.add(ambientLight);
+            this.scene.add(ambientLight);
             
             var spotLight = new THREE.SpotLight( 0xffffff );
-            scene.add(spotLight);
+            this.scene.add(spotLight);
 
             //Plane for testing in case there are some problems receiving or processing the server data
             //var plane = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), new THREE.MeshNormalMaterial());
