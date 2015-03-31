@@ -61,13 +61,12 @@
     }
 
     //reference to the mesh being currently picked; null if none
-    self.picked = null;
-    //material wich substitutes the default mesh material when a mesh is picked
+    self.picked = null; //material wich substitutes the default mesh material when a mesh is picked
     self.pickedMaterial = new THREE.MeshNormalMaterial();
     //self.notpickedMaterial = new THREE.MeshNormalMaterial({color: 0x000000});
 
     //self.notpickedMaterial = new THREE.MeshLambertMaterial({ color: 'grey', blending: THREE.NoBlending });
-    self.notpickedMaterial = THREE.MeshLambertMaterial({color: 0x000000, blending: THREE.NoBlending });
+    self.notpickedMaterial = THREE.MeshLambertMaterial();
     self.mybasicMaterial = new THREE.MeshNormalMaterial();
 
     //At last we add a new update method
