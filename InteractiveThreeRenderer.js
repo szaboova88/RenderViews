@@ -64,7 +64,7 @@
     self.picked = null;
     //material wich substitutes the default mesh material when a mesh is picked
     self.pickedMaterial = new THREE.MeshNormalMaterial();
-    self.notpickedMaterial = new THREE.MeshLambertMaterial({color: 0x000000});
+    self.notpickedMaterial = new THREE.MeshPhongMaterial({color: 0x000000});
     //self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
     self.mybasicMaterial = new THREE.MeshNormalMaterial();
     scene.fog=new THREE.FogExp2( 0xffffff, 0.015 );
