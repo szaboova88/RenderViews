@@ -69,8 +69,9 @@
     self.pickedMaterial = new THREE.MeshNormalMaterial();
     self.mybasicMaterial = new THREE.MeshNormalMaterial();
     
+    self.notpickedMaterial = new THREE.MeshNormalMaterial({color: 0xf0f0f0});
     //self.notpickedMaterial = new THREE.MeshNormalMaterial({color: 0x000000});
-    self.notpickedMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
+    //self.notpickedMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
     //self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
     //self.notpickedMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
 
