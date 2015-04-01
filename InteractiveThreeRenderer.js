@@ -76,8 +76,8 @@
     
     self.pickedMaterial = new THREE.MeshNormalMaterial();
     self.mybasicMaterial = new THREE.MeshNormalMaterial();
-    //self.notpickedMaterial = new THREE.MeshNormalMaterial({color: 0x7777ff});
-    self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
+    self.notpickedMaterial = new THREE.MeshNormalMaterial({ color: 'grey', blending: THREE.NoBlending });
+    //self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
 
     //At last we add a new update method
     self.updateCalls.push(function () {
