@@ -79,10 +79,7 @@
     self.notpickedMaterial = new THREE.MeshLambertMaterial({ color: 'grey', blending: THREE.NoBlending });
     //self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
 
-    var planeGeometry = new THREE.PlaneGeometry(60,20);
-var planeMaterial = new THREE.MeshLambertMaterial(
- {color: 0x000000});
-var plane = new THREE.Mesh(planeGeometry,planeMaterial);
+
 
     //At last we add a new update method
     self.updateCalls.push(function () {
@@ -152,6 +149,11 @@ var plane = new THREE.Mesh(planeGeometry,planeMaterial);
                                 this.picked.material = this.pickedMaterial;
                             }
                         this.Meshes[i].material = this.notpickedMaterial;
+                        ///////////////
+                            var planeGeometry = new THREE.PlaneGeometry(60,20);
+                            var planeMaterial = new THREE.MeshLambertMaterial({color: 0x000000});
+                            var plane = new THREE.Mesh(planeGeometry,planeMaterial);
+                        ///////////////
                     }
                     //The same as above but compressed into a single line
                     SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
