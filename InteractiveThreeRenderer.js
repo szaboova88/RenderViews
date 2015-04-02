@@ -60,11 +60,11 @@
         }
     }
     ///////////////////////////////////////////
-    /*
+    /**/
         var ambiColor = "#0c0c0c";
         var ambientLight = new THREE.AmbientLight(ambiColor);
-        this.scene.add(ambientLight);
-      */  
+        
+        
         var spotLight = new THREE.SpotLight( 0xffffff );
         spotLight.position.set( -40, 60, -10 );
         
@@ -148,10 +148,11 @@
                             if(this.Meshes[i] == this.picked){
                                 this.picked.material = this.pickedMaterial;
                             }
-                        this.Meshes[i].material = this.notpickedMaterial;
                         ///////////////
                         this.scene.add( spotLight );
+                        this.scene.add(ambientLight);
                         ///////////////
+                        this.Meshes[i].material = this.notpickedMaterial;
                     }
                     //The same as above but compressed into a single line
                     SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
