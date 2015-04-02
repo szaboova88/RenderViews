@@ -1,6 +1,11 @@
 ﻿function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
     //inherit the base class
     var self = new BasicThreeRenderer(domQuery);
+    
+                        ///////////////
+                        this.scene.add( spotLight );
+                        this.scene.add(ambientLight);
+                        ///////////////
 
     self.resolveNode = function(mesh)
     {
@@ -148,10 +153,6 @@
                             if(this.Meshes[i] == this.picked){
                                 this.picked.material = this.pickedMaterial;
                             }
-                        ///////////////
-                        this.scene.add( spotLight );
-                        this.scene.add(ambientLight);
-                        ///////////////
                         this.Meshes[i].material = this.notpickedMaterial;
                     }
                     //The same as above but compressed into a single line
