@@ -1,14 +1,13 @@
-var ambiColor = "#0c0c0c";
+﻿function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
+    //inherit the base class
+    var self = new BasicThreeRenderer(domQuery);
+    var ambiColor = "#0c0c0c";
         var ambientLight = new THREE.AmbientLight(ambiColor);
         this.scene.add(ambientLight);
         
         var spotLight = new THREE.SpotLight( 0xffffff );
         spotLight.position.set( -40, 60, -10 );
         this.scene.add( spotLight );
-
-﻿function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
-    //inherit the base class
-    var self = new BasicThreeRenderer(domQuery);
 
     self.resolveNode = function(mesh)
     {
