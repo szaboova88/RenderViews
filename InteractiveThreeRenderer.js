@@ -70,7 +70,9 @@
         this.scene.add( spotLight );
     */
     ///////////////////////////////////////////
-
+                            var planeGeometry = new THREE.PlaneGeometry(60,20);
+                            var planeMaterial = new THREE.MeshLambertMaterial({color: 0x000000});
+                            var plane = new THREE.Mesh(planeGeometry,planeMaterial);
     //reference to the mesh being currently picked; null if none
     self.picked = null; //material wich substitutes the default mesh material when a mesh is picked
     
@@ -150,9 +152,7 @@
                             }
                         this.Meshes[i].material = this.notpickedMaterial;
                         ///////////////
-                            var planeGeometry = new THREE.PlaneGeometry(60,20);
-                            var planeMaterial = new THREE.MeshLambertMaterial({color: 0x000000});
-                            var plane = new THREE.Mesh(planeGeometry,planeMaterial);
+                        this.scene.add(plane);
                         ///////////////
                     }
                     //The same as above but compressed into a single line
