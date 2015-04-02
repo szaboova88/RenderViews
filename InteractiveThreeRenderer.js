@@ -131,7 +131,7 @@
             if (intersects.length > 0) {
                         ///////////////
                         this.scene.add( spotLight );
-                        this.scene.add(ambientLight);
+                        //this.scene.add(ambientLight);
                         ///////////////
                 //If the closest mesh intersected is not the currently stored intersection (i.e. picked) mesh
                 if (intersects[0].object != this.picked) { 
