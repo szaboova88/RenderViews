@@ -61,7 +61,7 @@
     }
     ///////////////////////////////////////////
     /**/
-        var ambiColor = "#f0f0f0";
+        var ambiColor = "ffffff";
         var ambientLight = new THREE.AmbientLight(ambiColor);
         
         
@@ -130,7 +130,7 @@
             ///////// THIS ALTERNATIVE USES THE KNOCKOUT BINDING        
             if (intersects.length > 0) {
                         ///////////////
-                        //this.scene.add( spotLight );
+                        this.scene.add( spotLight );
                         this.scene.add(ambientLight);
                         ///////////////
                 //If the closest mesh intersected is not the currently stored intersection (i.e. picked) mesh
