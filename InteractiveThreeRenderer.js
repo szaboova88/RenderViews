@@ -1,13 +1,6 @@
 ﻿function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
     //inherit the base class
     var self = new BasicThreeRenderer(domQuery);
-    var ambiColor = "#0c0c0c";
-        var ambientLight = new THREE.AmbientLight(ambiColor);
-        this.scene.add(ambientLight);
-        
-        var spotLight = new THREE.SpotLight( 0xffffff );
-        spotLight.position.set( -40, 60, -10 );
-        this.scene.add( spotLight );
 
     self.resolveNode = function(mesh)
     {
@@ -85,6 +78,11 @@
     self.mybasicMaterial = new THREE.MeshNormalMaterial();
     self.notpickedMaterial = new THREE.MeshLambertMaterial({ color: 'grey', blending: THREE.NoBlending });
     //self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
+
+    var planeGeometry = new THREE.PlaneGeometry(60,20);
+var planeMaterial = new THREE.MeshLambertMaterial(
+ {color: 0xffffff});
+var plane = new THREE.Mesh(planeGeometry,planeMaterial);
 
     //At last we add a new update method
     self.updateCalls.push(function () {
