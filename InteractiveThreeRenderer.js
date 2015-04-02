@@ -8,11 +8,6 @@
         var seedID = self.Seeds[shapeID];
         var _seed = SeedWidgets.GetById(seedID);
         return {shape: _seed.GetShape(shapeID), seed: _seed};
-        
-     ///////////////
-    this.scene.add( spotLight );
-    this.scene.add(ambientLight);
-    ///////////////
     }
 
     //This renderer adds a very basic picking of shapes
@@ -134,6 +129,10 @@
 
             ///////// THIS ALTERNATIVE USES THE KNOCKOUT BINDING        
             if (intersects.length > 0) {
+                        ///////////////
+                        this.scene.add( spotLight );
+                        this.scene.add(ambientLight);
+                        ///////////////
                 //If the closest mesh intersected is not the currently stored intersection (i.e. picked) mesh
                 if (intersects[0].object != this.picked) { 
                     
