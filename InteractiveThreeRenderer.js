@@ -1,11 +1,10 @@
 ﻿function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
     //inherit the base class
     var self = new BasicThreeRenderer(domQuery);
-    
-                        ///////////////
-                        this.scene.add( spotLight );
-                        this.scene.add(ambientLight);
-                        ///////////////
+     ///////////////
+    this.scene.add( spotLight );
+    this.scene.add(ambientLight);
+    ///////////////
 
     self.resolveNode = function(mesh)
     {
@@ -79,7 +78,7 @@
     //reference to the mesh being currently picked; null if none
     self.picked = null; //material wich substitutes the default mesh material when a mesh is picked
     
-    self.pickedMaterial = new THREE.MeshNormalMaterial();
+    self.pickedMaterial = new THREE.MeshLambertMaterial({ color: 'red', blending: THREE.NoBlending });
     self.mybasicMaterial = new THREE.MeshNormalMaterial();
     self.notpickedMaterial = new THREE.MeshLambertMaterial({ color: 'grey', blending: THREE.NoBlending });
     //self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
