@@ -72,17 +72,19 @@
     ///////////////////////////////////////////
 
     //reference to the mesh being currently picked; null if none
-    self.picked = null; //material wich substitutes the default mesh material when a mesh is picked
-    
+    self.picked = null; 
+    //material wich substitutes the default mesh material when a mesh is picked
     self.pickedMaterial = new THREE.MeshNormalMaterial();
     self.mybasicMaterial = new THREE.MeshNormalMaterial();
     self.notpickedMaterial = new THREE.MeshLambertMaterial({ color: 'grey', blending: THREE.NoBlending });
     //self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
 
-
-
     //At last we add a new update method
     self.updateCalls.push(function () {
+                        ///////////////
+                        this.scene.add( spotLight );
+                        //this.scene.add(ambientLight);
+                        ///////////////
         //For an excellent explanation of the following few lines, please refer to
         //http://stackoverflow.com/questions/11036106/three-js-projector-and-ray-objects
 
@@ -129,10 +131,6 @@
 
             ///////// THIS ALTERNATIVE USES THE KNOCKOUT BINDING        
             if (intersects.length > 0) {
-                        ///////////////
-                        this.scene.add( spotLight );
-                        //this.scene.add(ambientLight);
-                        ///////////////
                 //If the closest mesh intersected is not the currently stored intersection (i.e. picked) mesh
                 if (intersects[0].object != this.picked) { 
                     
