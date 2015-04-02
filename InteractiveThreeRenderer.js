@@ -1,10 +1,6 @@
 ﻿function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
     //inherit the base class
     var self = new BasicThreeRenderer(domQuery);
-     ///////////////
-    this.scene.add( spotLight );
-    this.scene.add(ambientLight);
-    ///////////////
 
     self.resolveNode = function(mesh)
     {
@@ -12,6 +8,11 @@
         var seedID = self.Seeds[shapeID];
         var _seed = SeedWidgets.GetById(seedID);
         return {shape: _seed.GetShape(shapeID), seed: _seed};
+        
+     ///////////////
+    this.scene.add( spotLight );
+    this.scene.add(ambientLight);
+    ///////////////
     }
 
     //This renderer adds a very basic picking of shapes
