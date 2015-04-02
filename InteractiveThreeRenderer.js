@@ -81,7 +81,7 @@
 
     var planeGeometry = new THREE.PlaneGeometry(60,20);
 var planeMaterial = new THREE.MeshLambertMaterial(
- {color: 0xffffff});
+ {color: 0x000000});
 var plane = new THREE.Mesh(planeGeometry,planeMaterial);
 
     //At last we add a new update method
