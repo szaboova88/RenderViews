@@ -64,15 +64,13 @@
         var ambiColor = "#0c0c0c";
         var ambientLight = new THREE.AmbientLight(ambiColor);
         this.scene.add(ambientLight);
-        
+      */  
         var spotLight = new THREE.SpotLight( 0xffffff );
         spotLight.position.set( -40, 60, -10 );
-        this.scene.add( spotLight );
-    */
+        
+    
     ///////////////////////////////////////////
-                            var planeGeometry = new THREE.PlaneGeometry(60,20);
-                            var planeMaterial = new THREE.MeshLambertMaterial({color: 0x000000});
-                            var plane = new THREE.Mesh(planeGeometry,planeMaterial);
+
     //reference to the mesh being currently picked; null if none
     self.picked = null; //material wich substitutes the default mesh material when a mesh is picked
     
@@ -152,7 +150,7 @@
                             }
                         this.Meshes[i].material = this.notpickedMaterial;
                         ///////////////
-                        this.scene.add(plane);
+                        this.scene.add( spotLight );
                         ///////////////
                     }
                     //The same as above but compressed into a single line
