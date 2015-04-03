@@ -83,7 +83,7 @@
     self.updateCalls.push(function () {
                         ///////////////
                         this.scene.add( spotLight );
-                        this.scene.add(ambientLight);
+                        //this.scene.add(ambientLight);
                         ///////////////
         //For an excellent explanation of the following few lines, please refer to
         //http://stackoverflow.com/questions/11036106/three-js-projector-and-ray-objects
