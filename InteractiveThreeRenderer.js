@@ -61,12 +61,12 @@
     }
     ///////////////////////////////////////////
     /**/
-        var ambiColor = "ffffff";
+        var ambiColor = "#0c0c0c";
         var ambientLight = new THREE.AmbientLight(ambiColor);
         
         
         var spotLight = new THREE.SpotLight( 0xffffff );
-        //spotLight.position.set( -40, 60, -10 );
+        spotLight.position.set( -40, 60, -10 );
         
     
     ///////////////////////////////////////////
@@ -82,8 +82,8 @@
     //At last we add a new update method
     self.updateCalls.push(function () {
                         ///////////////
-                        this.scene.add( spotLight );
-                        //this.scene.add(ambientLight);
+                        //this.scene.add( spotLight );
+                        this.scene.add(ambientLight);
                         ///////////////
         //For an excellent explanation of the following few lines, please refer to
         //http://stackoverflow.com/questions/11036106/three-js-projector-and-ray-objects
