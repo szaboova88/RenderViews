@@ -60,16 +60,13 @@
         }
     }
     ///////////////////////////////////////////
-    /**/
-        //var ambiColor = "#0c0c0c";
-        var ambientLight = new THREE.AmbientLight( color: 0x1f9c2e );
-        ambientLight.position.set( -40, 60, -10 );
-        
-        
-        var spotLight = new THREE.SpotLight( 0xffffff );
-        //spotLight.position.set( -40, 60, -10 );
-        
-    
+    /*
+    //var ambiColor = "#0c0c0c";
+    var ambientLight = new THREE.AmbientLight( color: 0x1f9c2e );
+    ambientLight.position.set( -40, 60, -10 );
+    */    
+    var spotLight = new THREE.SpotLight( 0xffffff );
+    spotLight.position.set( -40, 60, -10 );
     ///////////////////////////////////////////
 
     //reference to the mesh being currently picked; null if none
@@ -82,10 +79,10 @@
 
     //At last we add a new update method
     self.updateCalls.push(function () {
-                        ///////////////
-                        this.scene.add( spotLight );
-                        //this.scene.add(ambientLight);
-                        ///////////////
+        ///////////////
+        this.scene.add( spotLight );
+        //this.scene.add(ambientLight);
+        ///////////////
         //For an excellent explanation of the following few lines, please refer to
         //http://stackoverflow.com/questions/11036106/three-js-projector-and-ray-objects
 
