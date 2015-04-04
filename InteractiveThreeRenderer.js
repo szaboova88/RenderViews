@@ -66,7 +66,7 @@
     ambientLight.position.set( -40, 60, -10 );
     */    
     var spotLight = new THREE.SpotLight( 0xffffff );
-    spotLight.position.set( 100, 100, 100 );
+    spotLight.position.set( 10, 10, 10 );
     ///////////////////////////////////////////spotLight.position.set( -40, 60, -10 );
 
     //reference to the mesh being currently picked; null if none
