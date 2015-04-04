@@ -63,6 +63,7 @@
     /**/
         var ambiColor = "#0c0c0c";
         var ambientLight = new THREE.AmbientLight(ambiColor);
+        ambientLight.position.set( -40, 60, -10 );
         
         
         var spotLight = new THREE.SpotLight( 0xffffff );
