@@ -67,7 +67,7 @@
         
         
         var spotLight = new THREE.SpotLight( 0xffffff );
-        spotLight.position.set( -40, 60, -10 );
+        //spotLight.position.set( -40, 60, -10 );
         
     
     ///////////////////////////////////////////
@@ -77,7 +77,7 @@
     //material wich substitutes the default mesh material when a mesh is picked
     self.pickedMaterial = new THREE.MeshNormalMaterial();
     self.mybasicMaterial = new THREE.MeshNormalMaterial();
-    self.notpickedMaterial = new THREE.MeshLambertMaterial({ color: 'white', blending: THREE.NoBlending });
+    self.notpickedMaterial = new THREE.MeshLambertMaterial({ color: 'blue', blending: THREE.NoBlending });
     //self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
 
     //At last we add a new update method
