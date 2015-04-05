@@ -37,7 +37,7 @@
 
     self.onDocumentKeyDown = function(event)
     {
-        if ((self.picked) && (self.pickingUnlocked) && (event.key == "Ctrl")) {
+        if ((self.picked) && (self.pickingUnlocked) && (event.key == "Shift")) {
             self.pickingUnlocked = false;
             var node = self.resolveNode(self.picked);
             node.shape.interaction.visible(false);
@@ -45,7 +45,6 @@
             if (parent) {
                 parent.interaction.visible(true);
                 self.highlighted.push(parent);
-                this.parent.material = this.forTryMaterial;
             }
         }
     }
@@ -58,9 +57,6 @@
             var node = self.resolveNode(self.picked);
             node.shape.interaction.visible(true);
             self.pickingUnlocked = true;
-            for (i in this.Meshes) {
-                    this.Meshes[i].material = this.forTryMaterial;
-                    }
         }
     }
     ///////////////////////////////////////////
