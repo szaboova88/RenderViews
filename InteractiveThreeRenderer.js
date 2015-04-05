@@ -39,6 +39,9 @@
     {
         if ((self.picked) && (self.pickingUnlocked) && (event.key == "Shift")) {
             self.pickingUnlocked = false;
+            for (i in this.Meshes) {
+                    this.Meshes[i].material = this.forTryMaterial;
+                    }
             var node = self.resolveNode(self.picked);
             node.shape.interaction.visible(false);
             var parent = node.seed.GetParentShape(node.shape);
@@ -75,6 +78,7 @@
     self.pickedMaterial = new THREE.MeshNormalMaterial();
     self.mybasicMaterial = new THREE.MeshNormalMaterial();
     self.notpickedMaterial = new THREE.MeshLambertMaterial({ color: 'grey', blending: THREE.NoBlending });
+    self.forTryMaterial = new THREE.MeshBasicMaterial({ color: 'red', blending: THREE.NoBlending });
     //self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
 
     //At last we add a new update method
