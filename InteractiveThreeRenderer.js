@@ -37,7 +37,7 @@
 
     self.onDocumentKeyDown = function(event)
     {
-        if ((self.picked) && (self.pickingUnlocked) && (event.key == "Shift")) {
+        if ((self.picked) && (self.pickingUnlocked) && (event.key == "Alt")) {
             self.pickingUnlocked = false;
             for (i in this.Meshes) {
                     this.Meshes[i].material = this.forTryMaterial;
