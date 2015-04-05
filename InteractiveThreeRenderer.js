@@ -52,12 +52,8 @@
     {
         if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Alt") || (event.keyIdentifier == "Alt"))) {
             self.pickingUnlocked = false;
-            var node = self.resolveNode(self.picked);
-            node.shape.interaction.visible(false);
-            var parent = node.seed.GetParentShape(node.shape);
-            if (parent) {
-                parent.interaction.visible(true);
-                self.highlighted.push(parent);
+            for (i in this.Meshes) {
+                this.Meshes[i].material = this.forTryMaterial;
             }
         }
     }
