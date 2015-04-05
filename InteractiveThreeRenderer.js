@@ -48,6 +48,12 @@
             }
         }
     }
+    self.onDocumentKeyDown = function(event)
+    {
+        if ((self.picked) && (self.pickingUnlocked) && (event.key == "Alt")) {
+            vypis
+        }
+    }
 
     self.onDocumentKeyUp = function (event) {
         while (self.highlighted.length > 0) {
