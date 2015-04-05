@@ -37,7 +37,7 @@
 
     self.onDocumentKeyDown = function(event)
     {
-        if ((self.picked) && (self.pickingUnlocked) && (event.key == "Shift")) {
+        if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Shift") || (event.keyIdentifier == "Shift"))) {
             self.pickingUnlocked = false;
             var node = self.resolveNode(self.picked);
             node.shape.interaction.visible(false);
