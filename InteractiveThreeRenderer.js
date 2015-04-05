@@ -34,7 +34,7 @@
 
     self.highlighted = [];
     self.pickingUnlocked = true;
-
+/*
     self.onDocumentKeyDown = function(event)
     {
         if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Shift") || (event.keyIdentifier == "Shift"))) {
@@ -47,7 +47,7 @@
                 self.highlighted.push(parent);
             }
         }
-    }
+    }*/
     self.onDocumentKeyDown = function(event)
     {
         if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Alt") || (event.keyIdentifier == "Alt"))) {
