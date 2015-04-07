@@ -47,9 +47,6 @@
                 self.highlighted.push(parent);
             }
         }
-    }
-    self.onDocumentKeyDown = function(event)
-    {
         if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Alt") || (event.keyIdentifier == "Alt"))) {
             self.pickingUnlocked = false;
             for (i in this.Meshes) {
@@ -57,6 +54,7 @@
             }
         }
     }
+    
 
     self.onDocumentKeyUp = function (event) {
         while (self.highlighted.length > 0) {
