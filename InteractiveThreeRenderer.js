@@ -48,7 +48,12 @@
                 parent.material = this.forTryMaterial;
             }
         }
+        
         if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Alt") || (event.keyIdentifier == "Alt"))) {
+            self.pickingUnlocked = false;
+        }
+        
+        if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Ctrl") || (event.keyIdentifier == "Ctrl"))) {
             self.pickingUnlocked = false;
         }
     }
