@@ -56,6 +56,7 @@
         
         if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Ctrl") || (event.keyIdentifier == "Ctrl"))) {
             self.pickingUnlocked = false;
+            $(domQuery).text("Ctrl");
         }
     }
     
