@@ -37,7 +37,7 @@
 
     self.onDocumentKeyDown = function(event)
     {
-        if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Shift") || (event.keyIdentifier == "Shift"))) {
+        if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Ctrl") || (event.keyIdentifier == "Ctrl"))) {
             self.pickingUnlocked = false;
             var node = self.resolveNode(self.picked);
             node.shape.interaction.visible(false);
@@ -53,7 +53,7 @@
             self.pickingUnlocked = false;
         }
         
-        if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Shift") || (event.keyIdentifier == "Shift"))) {
+        if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Ctrl") || (event.keyIdentifier == "Ctrl"))) {
             self.pickingUnlocked = false;
             //$(domQuery).text("Shift");
         }
