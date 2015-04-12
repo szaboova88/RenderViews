@@ -51,6 +51,7 @@
         
         if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Alt") || (event.keyIdentifier == "Alt"))) {
             self.pickingUnlocked = false;
+            self.picked.material = this.forTryMaterial;
         }
     }
     
