@@ -45,13 +45,11 @@
             if (parent) {
                 parent.interaction.visible(true);
                 self.highlighted.push(parent);
-                parent.material = this.forTryMaterial;
             }
         }
         
         if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Alt") || (event.keyIdentifier == "Alt"))) {
             self.pickingUnlocked = false;
-            self.picked.material = this.forTryMaterial;
         }
     }
     
