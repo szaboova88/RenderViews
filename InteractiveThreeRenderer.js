@@ -50,6 +50,13 @@
         
         if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Alt") || (event.keyIdentifier == "Alt"))) {
             self.pickingUnlocked = false;
+            var node = self.resolveNode(self.picked);
+            node.shape.interaction.visible(false);
+            var rule = node.seed.GetRuleShape(node.shape);
+            if (rule) {
+                rule.interaction.visible(true);
+                self.highlighted.push(rule);
+            }
         }
     }
     
