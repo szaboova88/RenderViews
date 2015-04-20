@@ -163,7 +163,6 @@
 
             ///////// THIS ALTERNATIVE USES THE KNOCKOUT BINDING        
             if (intersects.length > 0) {
-				composer.render();
                 //If the closest mesh intersected is not the currently stored intersection (i.e. picked) mesh
                 if (intersects[0].object != this.picked) { 
                     
