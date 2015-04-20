@@ -1,6 +1,26 @@
 ﻿function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
     //inherit the base class
-    var self = new BasicThreeRenderer(domQuery);
+    var self = new BasicThreeRenderer(domQuery);    
+    
+    
+    //renderer = new THREE.WebGLRenderer();
+				//renderer.setSize( window.innerWidth, window.innerHeight );
+
+				//document.body.appendChild( renderer.domElement );
+				
+				var composer = new THREE.EffectComposer( self );
+				composer.addPass( new THREE.RenderPass( scene, camera ) );
+
+				var hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
+				composer.addPass( hblur );
+				
+				var vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
+				vblur.renderToScreen = true;
+				composer.addPass( vblur );
+    
+    
+    
+    
 
     self.resolveNode = function(mesh)
     {
@@ -21,27 +41,6 @@
         document.addEventListener('mousemove', this.onDocumentMouseMove, false); //each time the mouse moves we want to execute our mouse move routine (defined below)
         document.addEventListener('keydown', this.onDocumentKeyDown, false);
         document.addEventListener('keyup', this.onDocumentKeyUp, false);    
-    
-    
-    
-    //renderer = new THREE.WebGLRenderer();
-				//renderer.setSize( window.innerWidth, window.innerHeight );
-
-				//document.body.appendChild( renderer.domElement );
-				
-				var composer = new THREE.EffectComposer( self );
-				composer.addPass( new THREE.RenderPass( scene, camera ) );
-
-				hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
-				composer.addPass( hblur );
-				
-				vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
-				vblur.renderToScreen = true;
-				composer.addPass( vblur );
-    
-    
-    
-    
     });
 
     self.mouse = { x: 0, y: 0 }; //here we store the last mouse position. The mouse position is stored only when the mouse moves, but the scene is mostly updated with a much higher frequence
