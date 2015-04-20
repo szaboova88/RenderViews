@@ -1,26 +1,6 @@
 ﻿function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
     //inherit the base class
     var self = new BasicThreeRenderer(domQuery);    
-    
-    
-    //renderer = new THREE.WebGLRenderer();
-				//renderer.setSize( window.innerWidth, window.innerHeight );
-
-				//document.body.appendChild( renderer.domElement );
-				
-				var composer = new THREE.EffectComposer( self );
-				composer.addPass( new THREE.RenderPass( scene, camera ) );
-
-				var hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
-				composer.addPass( hblur );
-				
-				var vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
-				vblur.renderToScreen = true;
-				composer.addPass( vblur );
-    
-    
-    
-    
 
     self.resolveNode = function(mesh)
     {
