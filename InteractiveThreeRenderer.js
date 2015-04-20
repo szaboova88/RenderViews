@@ -2,7 +2,7 @@
     //inherit the base class
     var self = new BasicThreeRenderer(domQuery);
     /////////////////////////////////
-    var composer = new THREE.EffectComposer( self );
+    composer = new THREE.EffectComposer( renderer );
     composer.addPass( new THREE.RenderPass( scene, camera ) );
     /////////////////////////////////
     self.resolveNode = function(mesh)
