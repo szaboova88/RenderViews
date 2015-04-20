@@ -1,7 +1,10 @@
 ﻿function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
     //inherit the base class
     var self = new BasicThreeRenderer(domQuery);
-
+    /////////////////////////////////
+    var composer = new THREE.EffectComposer( self );
+    composer.addPass( new THREE.RenderPass( scene, camera ) );
+    /////////////////////////////////
     self.resolveNode = function(mesh)
     {
         var shapeID = mesh.name;
@@ -89,6 +92,15 @@
     self.mybasicMaterial = new THREE.MeshNormalMaterial();
     self.notpickedMaterial = new THREE.MeshLambertMaterial({ color: 'grey', blending: THREE.NoBlending });
     self.forTryMaterial = new THREE.MeshBasicMaterial({ color: 'red', blending: THREE.NoBlending });
+    
+    
+                        hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
+                        composer.addPass( hblur );
+
+                        vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
+                        // set this shader pass to render to screen so we can see the effects
+                        vblur.renderToScreen = true;
+                        composer.addPass( vblur );
     //self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
 
     //At last we add a new update method
@@ -163,6 +175,7 @@
                                 this.picked.material = this.pickedMaterial;
                             }
                         this.Meshes[i].material = this.notpickedMaterial;
+                        composer.render();
                     }
                     //The same as above but compressed into a single line
                     SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
