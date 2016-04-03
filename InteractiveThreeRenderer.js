@@ -1,6 +1,6 @@
 ﻿function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
     //inherit the base class
-    var self = new BasicThreeRenderer(domQuery);    
+    var self = new BasicThreeRenderer(domQuery, true);    
 
     self.resolveNode = function(mesh)
     {
