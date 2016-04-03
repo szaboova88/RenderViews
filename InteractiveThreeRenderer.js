@@ -7,7 +7,7 @@
         var shapeID = mesh.name;
         var seedID = self.Seeds[shapeID];
         var _seed = SeedWidgets.GetById(seedID);
-        return {shape: _seed.GetShape(shapeID), seed: _seed};
+        //return {shape: _seed.GetShape(shapeID), seed: _seed};
     }
 
     //This renderer adds a very basic picking of shapes
@@ -151,7 +151,7 @@
                         var shapeID = this.picked.name;
                         var seedID = this.Seeds[shapeID];
                         var seed = SeedWidgets.GetById(seedID);
-                        var shape = seed.GetShape(shapeID);
+                        //var shape = seed.GetShape(shapeID);
                         //Use Knockout to unset the picked state of the shape
                         shape.interaction.picked(false);
                     }
@@ -165,7 +165,7 @@
                         this.Meshes[i].material = this.notpickedMaterial;
                     }
                     //The same as above but compressed into a single line
-                    SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
+                    //SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
                 }
             }
             else //There are no intersections
@@ -175,7 +175,7 @@
                     }
                 //Use Knockout to unset the picked state of the shape
                 if (this.picked)
-                    SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(false);
+                    //SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(false);
                 //Remove previous intersection mesh reference by setting current intersection object to null
                 this.picked = null;
                 /*for (i in Meshes) {
