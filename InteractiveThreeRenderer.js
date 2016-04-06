@@ -1,6 +1,6 @@
-﻿function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
+function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
     //inherit the base class
-    var self = new BasicThreeRenderer(domQuery, true);    
+    var self = new BasicThreeRenderer(domQuery);    
 
     self.resolveNode = function(mesh)
     {
@@ -153,7 +153,8 @@
                         var seed = SeedWidgets.GetById(seedID);
                         //var shape = seed.GetShape(shapeID);
                         //Use Knockout to unset the picked state of the shape
-                        shape.interaction.picked(false);
+                        var material = new THREE.MeshLambertMaterial({color: 0x5C3A21});
+                        this.picked.material = material;
                     }
                     //Store reference to closest mesh as current intersection mesh
                     this.picked = intersects[0].object;
@@ -166,6 +167,8 @@
                     }
                     //The same as above but compressed into a single line
                     //SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
+			var material = new THREE.MeshLambertMaterial({color: 0x5C3A21});
+                        this.picked.material = material;
                 }
             }
             else //There are no intersections
@@ -176,6 +179,8 @@
                 //Use Knockout to unset the picked state of the shape
                 if (this.picked)
                     //SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(false);
+			var material = new THREE.MeshLambertMaterial({color: 0x5C3A21});
+                        this.picked.material = material;
                 //Remove previous intersection mesh reference by setting current intersection object to null
                 this.picked = null;
                 /*for (i in Meshes) {
