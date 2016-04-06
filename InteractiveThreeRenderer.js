@@ -178,11 +178,11 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                     }
                 //Use Knockout to unset the picked state of the shape
                if (this.picked) {
-                    			var material = new THREE.MeshLambertMaterial({color: 0x5C3A21});
+                    	var material = new THREE.MeshLambertMaterial({color: 0x5C3A21});
                         this.picked.material = material;
                 
                 //Remove previous intersection mesh reference by setting current intersection object to null
-                this.picked = null;
+                //this.picked = null;
                 /*for (i in Meshes) {
                         Meshes[i].material = mesh.defaultMaterial;
                 }*/
