@@ -1,13 +1,36 @@
+'use strict'
+var fsqVertex = 
+'varying vec2 vUv;\
+\
+void main() {\
+    vUv = uv;\
+    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\
+}';
+
+var fsqFragment = 
+'varying vec2 vUv;\
+uniform sampler2D tDiffuse;\
+\
+void main() {\
+\
+    gl_FragColor = texture2D( tDiffuse, vUv );\
+}';
+
 function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
     //inherit the base class
-    var self = new BasicThreeRenderer(domQuery);    
+    var self = new BasicThreeRenderer(domQuery, true);
+
+    self.interactiveScene = null;
+    self.rayScene = null;
+
+    self.IMeshes = {};
 
     self.resolveNode = function(mesh)
     {
-        var shapeID = mesh.name;
+        var shapeID = mesh.mName;
         var seedID = self.Seeds[shapeID];
         var _seed = SeedWidgets.GetById(seedID);
-        //return {shape: _seed.GetShape(shapeID), seed: _seed};
+        return {shape: _seed.GetShape(shapeID), seed: _seed};
     }
 
     //This renderer adds a very basic picking of shapes
@@ -20,7 +43,44 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         this.projector = new THREE.Projector(); //create a new Projector. It will be used to cast a ray through the scene and get the list of intersections of the ray with shapes 
         document.addEventListener('mousemove', this.onDocumentMouseMove, false); //each time the mouse moves we want to execute our mouse move routine (defined below)
         document.addEventListener('keydown', this.onDocumentKeyDown, false);
-        document.addEventListener('keyup', this.onDocumentKeyUp, false);    
+        document.addEventListener('keyup', this.onDocumentKeyUp, false);
+
+        this.interactiveScene = new THREE.Scene();
+        this.rayScene = new THREE.Scene();
+        this.initLights(this.interactiveScene);
+
+        //Full Screen Quad
+        this.fsqScene = new THREE.Scene();
+        
+        this.fullScreenQuadMaterial = new THREE.ShaderMaterial({
+            uniforms: { tDiffuse: { type: "t", value: this.basicRTT } },
+            vertexShader: fsqVertex,
+            fragmentShader: fsqFragment,
+            depthTest: false,
+            depthWrite: false
+        });
+
+        var quad = new THREE.Mesh(this.RTTPlane, this.fullScreenQuadMaterial);
+        quad.dynamic = true;
+        quad.position.z = -1;
+        this.fsqScene.add(quad);
+    });
+
+    self.InteractiveRender = function () {
+        if (!this.imgOverride) {
+            this.renderer.clear(true, false, false);
+            this.renderer.render(this.fsqScene, this.RTTCamera);
+            this.renderer.render(self.debugRays ? this.rayScene : this.interactiveScene, this.camera);
+        }
+    }
+
+    self.renderCalls.push(function () {
+        self.InteractiveRender();
+    });
+
+    self.resizeCalls.push(function () {
+        this.fullScreenQuadMaterial.uniforms.tDiffuse.value = this.basicRTT;
+        this.fullScreenQuadMaterial.uniforms.tDiffuse.needsUpdate = true;
     });
 
     self.mouse = { x: 0, y: 0 }; //here we store the last mouse position. The mouse position is stored only when the mouse moves, but the scene is mostly updated with a much higher frequence
@@ -30,12 +90,15 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         //Update the mouse position, a transformation from screen to normalized device coordinates is necessary; notice the flipped y
         self.mouse.x = ((event.clientX - self.container.offset().left) / self.container.innerWidth()) * 2 - 1;
         self.mouse.y = -((event.clientY - self.container.offset().top) / self.container.innerHeight()) * 2 + 1;
+        self.Update();
     }
 
     self.highlighted = [];
     self.pickingUnlocked = true;
 
-    self.onDocumentKeyDown = function(event)
+    self.debugRays = false;
+
+    self.onDocumentKeyDown = function onDocumentKeyDown(event)
     {
         if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Shift") || (event.keyIdentifier == "Shift"))) {
             self.pickingUnlocked = false;
@@ -47,22 +110,14 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                 self.highlighted.push(parent);
             }
         }
-        
-        if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Alt") || (event.keyIdentifier == "Alt"))) {
-            self.pickingUnlocked = false;
-            alert('Rule');
-            var node = self.resolveNode(self.picked);
-            node.shape.interaction.visible(false);
-            var rule = node.seed.GetRuleShape(node.shape);
-            if (rule) {
-                rule.interaction.visible(true);
-                self.highlighted.push(rule);
-            }
-        }
-    }
-    
 
-    self.onDocumentKeyUp = function (event) {
+        //if (event.ctrlKey)
+        //    self.debugRays = true;
+
+        self.Update();
+    }
+
+    self.onDocumentKeyUp = function onDocumentKeyUp(event) {
         while (self.highlighted.length > 0) {
             self.highlighted.pop().interaction.visible(false);
         }
@@ -71,36 +126,32 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             node.shape.interaction.visible(true);
             self.pickingUnlocked = true;
         }
+        //self.debugRays = false;
+        self.Update();
     }
-    ///////////////////////////////////////////
-    /*
-    //var ambiColor = "#0c0c0c";
-    var ambientLight = new THREE.AmbientLight( color: 0x1f9c2e );
-    ambientLight.position.set( -40, 60, -10 );
-    */    
-    var spotLight = new THREE.SpotLight( 0xffffff );
-    spotLight.position.set( 10, 10, 10 );
-    ///////////////////////////////////////////spotLight.position.set( -40, 60, -10 );
 
     //reference to the mesh being currently picked; null if none
-    self.picked = null; 
+    self.picked = null;
     //material wich substitutes the default mesh material when a mesh is picked
-    self.pickedMaterial = new THREE.MeshNormalMaterial();
-    self.mybasicMaterial = new THREE.MeshNormalMaterial();
-    self.notpickedMaterial = new THREE.MeshLambertMaterial({ color: 'grey', blending: THREE.NoBlending });
-    self.forTryMaterial = new THREE.MeshBasicMaterial({ color: 'red', blending: THREE.NoBlending });
-    //self.notpickedMaterial = new THREE.MeshBasicMaterial({ color: 'grey', blending: THREE.NoBlending });
+    self.pickedMaterial = new THREE.MeshBasicMaterial({
+        color: 'red',
+        transparent: true,
+        opacity: 0.4,
+        //depthWrite: false,
+        polygonOffset: true,
+        polygonOffsetFactor: -1, // positive value pushes polygon further away
+        polygonOffsetUnits: 1
+    });
 
     //At last we add a new update method
     self.updateCalls.push(function () {
-        ///////////////
-        this.scene.add( spotLight );
-        //this.scene.add(ambientLight);
-        ///////////////
         //For an excellent explanation of the following few lines, please refer to
         //http://stackoverflow.com/questions/11036106/three-js-projector-and-ray-objects
 
-        if (this.pickingUnlocked) {
+        this.interactiveScene.updateMatrixWorld();
+        this.camera.updateMatrixWorld();
+
+        if (this.pickingUnlocked && (this.rayScene.children.length > 0)) {
             //First we create a ray passing through the mouse position
             var mousePoint = new THREE.Vector3(this.mouse.x, this.mouse.y, 1); //The mouse point in homogenous coordinates (1 at the end)
             //this.projector.unprojectVector(mousePoint, this.camera); //Unproject the point into the 3D world space
@@ -108,7 +159,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             var ray = new THREE.Raycaster(this.camera.position, mousePoint.sub(this.camera.position).normalize()); //Ray with origin at the mouse position and direction into the scene passing through the unprojected point
 
             //Returns an array containing all objects in the scene with which the ray intersects. Result are ordered by increasing distance from the start of the ray.
-            var intersects = ray.intersectObjects(this.scene.children);
+            var intersects = ray.intersectObjects(this.picked ? this.rayScene.children.concat([this.picked]) : this.rayScene.children);
 
             ///////// THIS ALTERNATIVE DOES NOT USE THE KNOCKOUT BINDING (and stays here just for educative purposes, please read it first and compare to the approach used below)
             //If any intersection exists
@@ -144,49 +195,29 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             ///////// THIS ALTERNATIVE USES THE KNOCKOUT BINDING        
             if (intersects.length > 0) {
                 //If the closest mesh intersected is not the currently stored intersection (i.e. picked) mesh
-                if (intersects[0].object != this.picked) { 
-                    
+                if (intersects[0].object != this.picked) {
                     //Restore previous intersection mash (if anything was picked before) to its original material
                     if (this.picked) {
-                        var shapeID = this.picked.name;
+                        var shapeID = this.picked.mName;
                         var seedID = this.Seeds[shapeID];
                         var seed = SeedWidgets.GetById(seedID);
-                        //var shape = seed.GetShape(shapeID);
+                        var shape = seed.GetShape(shapeID);
                         //Use Knockout to unset the picked state of the shape
-                        var material = new THREE.MeshLambertMaterial({color: 0x5C3A21});
-                        this.picked.material = material;
+                        shape.interaction.picked(false);
                     }
                     //Store reference to closest mesh as current intersection mesh
                     this.picked = intersects[0].object;
-                    
-                    for (i in this.Meshes) {
-                            if(this.Meshes[i] == this.picked){
-                                this.picked.material = this.pickedMaterial;
-                            }
-                        this.Meshes[i].material = this.notpickedMaterial;
-                    }
                     //The same as above but compressed into a single line
-                    //SeedWidgets.GetById(this.Seeds[this.picked.name]).GetShape(this.picked.name).interaction.picked(true);
-			var material = new THREE.MeshLambertMaterial({color: 0x5C3A21});
-                        this.picked.material = material;
+                    SeedWidgets.GetById(this.Seeds[this.picked.mName]).GetShape(this.picked.mName).interaction.picked(true);
                 }
             }
             else //There are no intersections
             {
-                for (i in this.Meshes) {
-                    this.Meshes[i].material = this.mybasicMaterial;
-                    }
                 //Use Knockout to unset the picked state of the shape
-               if (this.picked) {
-                    	var material = new THREE.MeshLambertMaterial({color: 0x5C3A21});
-                        this.picked.material = material;
-               }
-                
+                if (this.picked)
+                    SeedWidgets.GetById(this.Seeds[this.picked.mName]).GetShape(this.picked.mName).interaction.picked(false);
                 //Remove previous intersection mesh reference by setting current intersection object to null
                 this.picked = null;
-                /*for (i in Meshes) {
-                        Meshes[i].material = mesh.defaultMaterial;
-                }*/
             }
             /**/
         }
@@ -196,22 +227,29 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.addCalls.push(function(shape)
     {
         var id = shape.id;
+        //if (!self.Meshes.hasOwnProperty(id))
+        var m = self.Meshes[id].clone();
+        m.material = self.pickedMaterial;
+        m.mName = id;
+        self.IMeshes[id] = m;
+
+        if (shape.interaction.visible())
+            self.rayScene.add(m);
+
         var pickSubscription = shape.interaction.picked.subscribe(function (newVal) {
-            var mesh = this.Meshes[id]; //get the mesh for the shape
+            var mesh = this.IMeshes[id]; //get the mesh for the shape
             if (mesh) {
                 if (newVal) {
-                    if (!mesh.defaultMaterial) //if it has no defaultMaterial stored yet, backup the current material
-                        mesh.defaultMaterial = mesh.material;
-                    mesh.material = this.pickedMaterial; 
-                    /**/
-                //assign it the picked material
-                    //TODO STUDENTS this will not work once selection and highlighting are worging, as the materials would easily overwrite each other.
+                    this.interactiveScene.add(mesh);
                 }
                 else {
-                    return;
-                    //mesh.material = mesh.defaultMaterial; //if the picking just ended, assign back the default material
-                    //TODO STUDENTS this won't work either
+                    if (shape.interaction.visible())
+                        this.rayScene.add(mesh);
+                    else
+                        this.interactiveScene.remove(mesh);
                 }
+                //this.RenderSingleFrame();
+                self.InteractiveRender();
             }
         }.bind(self));
 
@@ -230,12 +268,18 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.removeCalls.push(function (shape) {
         //very similar to RemoveSeedSubscription
         var id = shape.id;
+        if (self.IMeshes.hasOwnProperty(id)) {
+            self.rayScene.remove(self.IMeshes[id]);
+            self.interactiveScene.remove(self.IMeshes[id]);
+        }
+        delete self.IMeshes[id];
+
         if (id in this.ShapeSubscriptions) {
             for (t in this.ShapeSubscriptions[id])
                 this.ShapeSubscriptions[id][t].dispose();
 
             delete this.ShapeSubscriptions[id];
-        }        
+        }
     });
 
     return self;
