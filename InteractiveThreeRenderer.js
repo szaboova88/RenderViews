@@ -240,7 +240,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     {
         var id = shape.id;
         //if (!self.Meshes.hasOwnProperty(id))
-        for (i in self.Meshes) {
+        for (var i in self.Meshes) {
         var m = self.Meshes[i].clone();
             if (i == id) {
             m.material = self.pickedMaterial;
