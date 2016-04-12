@@ -134,7 +134,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.picked = null;
     //material wich substitutes the default mesh material when a mesh is picked
     self.pickedMaterial = new THREE.MeshBasicMaterial({
-        color: 'red',
+        color: 'blue',
         transparent: true,
         opacity: 0.4,
         //depthWrite: false,
