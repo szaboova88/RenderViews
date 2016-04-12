@@ -134,7 +134,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.picked = null;
     //material wich substitutes the default mesh material when a mesh is picked
     self.pickedMaterial = new THREE.MeshBasicMaterial({
-        color: 'blue',
+        color: 'red',
         transparent: true,
         opacity: 1,
         //depthWrite: false,
@@ -144,6 +144,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     });
     
     //---------------------------------------------
+    /*
     self.notPickedMaterial = new THREE.MeshBasicMaterial({
         color: 'grey',
         transparent: true,
@@ -153,6 +154,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         polygonOffsetFactor: -1, // positive value pushes polygon further away
         polygonOffsetUnits: 1
     });
+    */
     //---------------------------------------------
 
     //At last we add a new update method
