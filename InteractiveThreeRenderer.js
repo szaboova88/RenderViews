@@ -240,18 +240,12 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     {
         var id = shape.id;
         //if (!self.Meshes.hasOwnProperty(id))
-        for (var i in self.Meshes) {
-        var m = self.Meshes[i].clone();
-            if (i == id) {
+        var m = self.Meshes[id].clone();
             m.material = self.pickedMaterial;
-            } else {
-            m.material = self.notPickedMaterial;    
-            }
-        m.mName = i;
-        self.IMeshes[i] = m;
+        m.mName = id;
+        self.IMeshes[id] = m;
         if (shape.interaction.visible())
             self.rayScene.add(m);
-        }
 
         var pickSubscription = shape.interaction.picked.subscribe(function (newVal) {
             var mesh = this.IMeshes[id]; //get the mesh for the shape
