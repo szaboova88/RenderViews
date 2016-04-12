@@ -139,7 +139,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         opacity: 0.4,
         //depthWrite: false,
         polygonOffset: true,
-        polygonOffsetFactor: 3, // positive value pushes polygon further away
+        polygonOffsetFactor: -1, // positive value pushes polygon further away
         polygonOffsetUnits: 1
     });
     
