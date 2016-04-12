@@ -136,7 +136,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.pickedMaterial = new THREE.MeshBasicMaterial({
         color: 'red',
         transparent: true,
-        opacity: 1,
+        opacity: 0.4,
         //depthWrite: false,
         polygonOffset: true,
         polygonOffsetFactor: -1, // positive value pushes polygon further away
