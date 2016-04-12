@@ -142,6 +142,18 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         polygonOffsetFactor: -1, // positive value pushes polygon further away
         polygonOffsetUnits: 1
     });
+    
+    //---------------------------------------------
+    self.notPickedMaterial = new THREE.MeshBasicMaterial({
+        color: 'grey',
+        transparent: true,
+        opacity: 1,
+        //depthWrite: false,
+        polygonOffset: true,
+        polygonOffsetFactor: -1, // positive value pushes polygon further away
+        polygonOffsetUnits: 1
+    });
+    //---------------------------------------------
 
     //At last we add a new update method
     self.updateCalls.push(function () {
