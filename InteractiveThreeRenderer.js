@@ -25,6 +25,12 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 
     self.IMeshes = {};
 
+    self.NMeshes = {};
+
+    self.trololo = {};
+
+    console.log(self.NMeshes);
+
     self.resolveNode = function(mesh)
     {
         var shapeID = mesh.mName;
@@ -144,7 +150,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     });
     
     //---------------------------------------------
-    /*
+    
     self.notPickedMaterial = new THREE.MeshBasicMaterial({
         color: 'grey',
         transparent: true,
@@ -154,7 +160,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         polygonOffsetFactor: -1, // positive value pushes polygon further away
         polygonOffsetUnits: 1
     });
-    */
+    
     //---------------------------------------------
 
     //At last we add a new update method
@@ -240,12 +246,36 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     //////// AS KNOCKOUT IS USED, WE NEED TO SUBSCRIBE TO THE PICKED STATE CHANGES
     self.addCalls.push(function(shape)
     {
+
         var id = shape.id;
+        console.log(self);
         //if (!self.Meshes.hasOwnProperty(id))
         var m = self.Meshes[id].clone();
+        var n = self.Meshes[id].clone();
+            console.log(m);
+            console.log(n);
             m.material = self.pickedMaterial;
+            n.material = self.notPickedMaterial;
+
         m.mName = id;
+        n.mName = id;
+
+
+        console.log(m);
+        console.log(n);
+        console.log(id);
+        console.log('self.IMeshes');
+        console.log(self.IMeshes);
+        console.log('self.NMeshes');
+        console.log(self.NMeshes);
+        console.log('self.trololo');
+        console.log(self.trololo);
+        
+        
         self.IMeshes[id] = m;
+
+        self.NMeshes[id] = n;
+        
         if (shape.interaction.visible())
             self.rayScene.add(m);
 
@@ -254,12 +284,26 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             if (mesh) {
                 if (newVal) {
                     this.interactiveScene.add(mesh);
+                    console.log('newVal');
+                    console.log(newVal);
+                                $.each( this.NMeshes, function( key, value ) {
+                                    if(id != key) {
+                                        this.interactiveScene.add(value);
+                                    }
+                                });
                 }
                 else {
                     if (shape.interaction.visible())
+                        {
                         this.rayScene.add(mesh);
-                    else
+                        console.log('this.rayScene.add(mesh);');
+                        console.log(mesh);
+                        }
+                    else {
                         this.interactiveScene.remove(mesh);
+                         console.log('this.interactiveScene.remove(mesh);');
+                        console.log(mesh);
+                        }
                 }
                 //this.RenderSingleFrame();
                 self.InteractiveRender();
@@ -286,6 +330,12 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             self.interactiveScene.remove(self.IMeshes[id]);
         }
         delete self.IMeshes[id];
+
+        if (self.NMeshes.hasOwnProperty(id)) {
+            self.rayScene.remove(self.NMeshes[id]);
+            self.interactiveScene.remove(self.NMeshes[id]);
+        }
+        delete self.NMeshes[id];
 
         if (id in this.ShapeSubscriptions) {
             for (t in this.ShapeSubscriptions[id])
