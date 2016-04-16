@@ -24,12 +24,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.rayScene = null;
 
     self.IMeshes = {};
-
     self.NMeshes = {};
-
-    self.trololo = {};
-
-    console.log(self.NMeshes);
 
     self.resolveNode = function(mesh)
     {
@@ -268,12 +263,8 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         console.log(self.IMeshes);
         console.log('self.NMeshes');
         console.log(self.NMeshes);
-        console.log('self.trololo');
-        console.log(self.trololo);
-        
-        
-        self.IMeshes[id] = m;
 
+        self.IMeshes[id] = m;
         self.NMeshes[id] = n;
         
         if (shape.interaction.visible())
@@ -284,25 +275,23 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             if (mesh) {
                 if (newVal) {
                     this.interactiveScene.add(mesh);
-                    console.log('newVal');
-                    console.log(newVal);
-                                $.each( this.NMeshes, function( key, value ) {
-                                    if(id != key) {
-                                        this.interactiveScene.add(value);
-                                    }
-                                });
+                        $.each( this.NMeshes, function( key, value ) {
+                            if(id != key) {
+                                    this.interactiveScene.add(value);
+                                }
+                            });
                 }
                 else {
                     if (shape.interaction.visible())
                         {
-                        this.rayScene.add(mesh);
-                        console.log('this.rayScene.add(mesh);');
-                        console.log(mesh);
+                            this.rayScene.add(mesh);
+                            console.log('this.rayScene.add(mesh);');
+                            console.log(mesh);
                         }
                     else {
-                        this.interactiveScene.remove(mesh);
-                         console.log('this.interactiveScene.remove(mesh);');
-                        console.log(mesh);
+                            this.interactiveScene.remove(mesh);
+                             console.log('this.interactiveScene.remove(mesh);');
+                            console.log(mesh);
                         }
                 }
                 //this.RenderSingleFrame();
