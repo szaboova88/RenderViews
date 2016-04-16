@@ -275,11 +275,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             if (mesh) {
                 if (newVal) {
                     this.interactiveScene.add(mesh);
-                        $.each( this.NMeshes, function( key, value ) {
-                            if(id != key) {
-                                    this.interactiveScene.add(value);
-                                }
-                            });
+                    this.interactiveScene.add(this.NMeshes[6]);
                 }
                 else {
                     if (shape.interaction.visible())
