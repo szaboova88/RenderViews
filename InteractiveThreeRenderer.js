@@ -286,7 +286,8 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                         }
                     else {
                             this.interactiveScene.remove(mesh);
-                             console.log('this.interactiveScene.remove(mesh);');
+                            this.interactiveScene.remove(this.NMeshes[6]);
+                            console.log('this.interactiveScene.remove(mesh);');
                             console.log(mesh);
                         }
                 }
