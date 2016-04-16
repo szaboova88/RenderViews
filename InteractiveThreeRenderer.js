@@ -281,6 +281,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                     if (shape.interaction.visible())
                         {
                             this.rayScene.add(mesh);
+                            this.rayScene.add(this.NMeshes[6]);
                             console.log('this.rayScene.add(mesh);');
                             console.log(mesh);
                         }
