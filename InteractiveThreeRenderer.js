@@ -312,6 +312,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.removeCalls.push(function (shape) {
         //very similar to RemoveSeedSubscription
         var id = shape.id;
+        console.log(id);
         if (self.IMeshes.hasOwnProperty(id)) {
             self.rayScene.remove(self.IMeshes[id]);
             self.interactiveScene.remove(self.IMeshes[id]);
