@@ -135,7 +135,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.picked = null;
     //material wich substitutes the default mesh material when a mesh is picked
     self.pickedMaterial = new THREE.MeshBasicMaterial({
-        color: 'pink',
+        color: 'purple',
         transparent: true,
         opacity: 0.4,
         //depthWrite: false,
@@ -147,9 +147,9 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     //---------------------------------------------
     
     self.notPickedMaterial = new THREE.MeshBasicMaterial({
-        color: 'grey',
+        color: 'black',
         transparent: true,
-        opacity: 1,
+        opacity: 0.4,
         //depthWrite: false,
         polygonOffset: true,
         polygonOffsetFactor: -1, // positive value pushes polygon further away
@@ -274,8 +274,8 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             var mesh = this.IMeshes[id]; //get the mesh for the shape
             if (mesh) {
                 if (newVal) {
-                    this.interactiveScene.add(mesh);
                     this.interactiveScene.add(this.NMeshes[6]);
+                    this.interactiveScene.add(mesh);
                 }
                 else {
                     if (shape.interaction.visible())
