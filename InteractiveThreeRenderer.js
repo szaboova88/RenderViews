@@ -274,17 +274,13 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             var mesh = this.IMeshes[id]; //get the mesh for the shape
             if (mesh) {
                 if (newVal) {
-                    for(var i in this.NMeshes[]){
                     this.interactiveScene.add(this.NMeshes[i]);
-                    }
                     this.interactiveScene.add(mesh);
                 }
                 else {
                     if (shape.interaction.visible())
                         {
-                            for(var i in this.NMeshes[]){
                             this.rayScene.add(this.NMeshes[i]);
-                            }
                             this.rayScene.add(mesh);
                             console.log('this.rayScene.add(mesh);');
                             console.log(mesh);
