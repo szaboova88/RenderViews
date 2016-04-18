@@ -158,7 +158,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     
     //---------------------------------------------
     
-    self.newGeometry = new THREE.BoxGeometry( 2, 2, 1 );
+    self.newGeometry = new THREE.BoxGeometry( 1.3, 1.3, 1.3 );
 
     //At last we add a new update method
     self.updateCalls.push(function () {
