@@ -267,34 +267,49 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         self.IMeshes[id] = m;
         self.NMeshes[id] = n;
         
-        if (shape.interaction.visible())
+        if (shape.interaction.visible()) {
             self.rayScene.add(m);
+            self.rayScene.add(n);
+            }
 
         var pickSubscription = shape.interaction.picked.subscribe(function (newVal) {
             var mesh = this.IMeshes[id]; //get the mesh for the shape
             if (mesh) {
                 if (newVal) {
-                    this.interactiveScene.add(this.NMeshes[6]);
-                    this.interactiveScene.add(mesh);
+                    //this.interactiveScene.add(this.NMeshes[6]);
                     for (var item in this.NMeshes) {
-                        console.log(this.NMeshes[item].parent);
+                       if (item != id) { 
+                            if(this.NMeshes[item].parent) {
+                                this.interactiveScene.add(this.NMeshes[item]);
+                            };
+                        };
                     }
+                    this.interactiveScene.add(mesh);
+             
                 }
                 else {
                     if (shape.interaction.visible())
                         {
-                            this.rayScene.add(this.NMeshes[6]);
+                            //this.rayScene.add(this.NMeshes[6]);
                             this.rayScene.add(mesh);
                             for (var item in this.NMeshes) {
-                                console.log(this.NMeshes[item].parent);
+                                if (item != id) { 
+                                    if(this.NMeshes[item].parent) {
+                                        this.rayScene.add(this.NMeshes[item]);
+                                    };
+                                };
                             }
                         }
                     else {
                             this.interactiveScene.remove(mesh);
-                            this.interactiveScene.remove(this.NMeshes[6]);
-                            for (var item in this.NMeshes) {
-                                console.log(this.NMeshes[item].parent);
+                            //this.interactiveScene.remove(this.NMeshes[6]);
+                                               for (var item in this.NMeshes) {
+                       if (item != id) { 
+                            if(this.NMeshes[item].parent) {
+                                this.interactiveScene.remove(this.NMeshes[item]);
                             }
+                            };
+                        }
                         }
                 }
                 //this.RenderSingleFrame();
