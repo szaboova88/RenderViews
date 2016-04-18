@@ -257,9 +257,13 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         m.mName = id;
         n.mName = id;
 
-        console.log('self.newGeometry');
-        console.log(self.newGeometry);
-        m.geometry = self.newGeometry;
+        //console.log('self.newGeometry');
+        //console.log(self.newGeometry);
+        //m.geometry = self.newGeometry;
+        console.log('m.scale.x = 2;');
+        m.scale.x = 2;
+        m.scale.y = 2;
+        m.scale.y = 2;
 
         console.log(m);
         console.log(n);
@@ -289,6 +293,10 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                             };
                         };
                     }
+                        console.log('mesh.scale.x = 2;');
+                        mesh.scale.x = 2;
+                        mesh.scale.y = 2;
+                        mesh.scale.y = 2;
                     this.interactiveScene.add(mesh);
              
                 }
