@@ -276,20 +276,25 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                 if (newVal) {
                     this.interactiveScene.add(this.NMeshes[6]);
                     this.interactiveScene.add(mesh);
+                    for (var item in this.NMeshes) {
+                        console.log(this.NMeshes[item].parent);
+                    }
                 }
                 else {
                     if (shape.interaction.visible())
                         {
                             this.rayScene.add(this.NMeshes[6]);
                             this.rayScene.add(mesh);
-                            console.log('this.rayScene.add(mesh);');
-                            console.log(mesh);
+                            for (var item in this.NMeshes) {
+                                console.log(this.NMeshes[item].parent);
+                            }
                         }
                     else {
                             this.interactiveScene.remove(mesh);
                             this.interactiveScene.remove(this.NMeshes[6]);
-                            console.log('this.interactiveScene.remove(mesh);');
-                            console.log(mesh);
+                            for (var item in this.NMeshes) {
+                                console.log(this.NMeshes[item].parent);
+                            }
                         }
                 }
                 //this.RenderSingleFrame();
