@@ -260,7 +260,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         //console.log('self.newGeometry');
         //console.log(self.newGeometry);
         //m.geometry = self.newGeometry;
-        m.scale.set(2,2,2);
+        m.scale.set(1.2,1.2,1.2);
         m.matrixAutoUpdate = true;
 
         console.log(m);
