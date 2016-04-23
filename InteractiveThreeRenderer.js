@@ -331,8 +331,20 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 
             var selectSubscription = shape.interaction.selected.subscribe(function (newVal) {
                 console.log('selectSubscription');
-
-                self.InteractiveRender();
+                var mesh = this.GMeshes[id]; //get the mesh for the shape
+                if (mesh) {
+                    if (newVal) {
+                        this.interactiveScene.add(mesh);
+                    } else {
+                        if (shape.interaction.visible()) {
+                            this.rayScene.add(mesh);
+                        } else {
+                            this.interactiveScene.remove(mesh);
+                        }
+                    }
+                    //this.RenderSingleFrame();
+                    self.InteractiveRender();
+                }
             }.bind(self));
 
             //Add the subscription to the subscriptions map for the given shape, note that again we use an object to possibly store several subscriptions per shape
