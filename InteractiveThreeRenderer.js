@@ -256,14 +256,15 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             var id = shape.id;
             //if (!self.Meshes.hasOwnProperty(id))
             var m = self.Meshes[id].clone();
-            var n = self.Meshes[id].clone();
             var g = self.Meshes[id].clone();
+            var n = self.Meshes[id].clone();
 
             m.material = self.pickedMaterial;
             g.material = self.pickedMaterial;
             n.material = self.notPickedMaterial;
 
             m.mName = id;
+            g.mName = id;
             n.mName = id;
 
             //console.log('self.newGeometry');
@@ -273,6 +274,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             g.matrixAutoUpdate = true;
 
             console.log(m);
+            console.log(g);
             console.log(n);
             console.log(id);
             console.log('self.IMeshes');
@@ -281,13 +283,13 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             console.log(self.NMeshes);
 
             self.IMeshes[id] = m;
-            self.NMeshes[id] = n;
             self.GMeshes[id] = g;
+            self.NMeshes[id] = n;
 
             if (shape.interaction.visible()) {
                 self.rayScene.add(m);
-                self.rayScene.add(n);
                 self.rayScene.add(g);
+                self.rayScene.add(n);
             }
 
             var pickSubscription = shape.interaction.picked.subscribe(function (newVal) {
