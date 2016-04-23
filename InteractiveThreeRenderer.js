@@ -173,7 +173,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         polygonOffsetFactor: -1, // positive value pushes polygon further away
         polygonOffsetUnits: 1
     });
-
+    self.alt1PickedMaterial = new THREE.SpriteMaterial( { map: map, color: 'black', fog: true } );
     //---------------------------------------------
 
     self.newGeometry = new THREE.BoxGeometry(1.2, 1.2, 2);
@@ -268,7 +268,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             var n = self.Meshes[id].clone();
 
             m.material = self.pickedMaterial;
-            g.material = self.altPickedMaterial;
+            g.material = self.alt1PickedMaterial;
             n.material = self.notPickedMaterial;
 
             m.mName = id;
