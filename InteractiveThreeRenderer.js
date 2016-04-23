@@ -111,15 +111,12 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         }
 
         if ((self.picked) && (self.pickingUnlocked) && (event.key == "Alt") || (event.altKey == true)) {
+            self.pickingUnlocked = false;
             if (self.picked) {
                 var node = self.resolveNode(self.picked);
                 node.shape.interaction.selected(true);
             }
         }
-        //if (event.ctrlKey)
-        //    self.debugRays = true;
-
-        self.Update();
         //if (event.ctrlKey)
         //    self.debugRays = true;
 
@@ -133,6 +130,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         if (!self.pickingUnlocked) {
             var node = self.resolveNode(self.picked);
             node.shape.interaction.visible(true);
+            node.shape.interaction.selected(false);
             self.pickingUnlocked = true;
         }
         //self.debugRays = false;
