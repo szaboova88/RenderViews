@@ -156,7 +156,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         color: 'black',
         transparent: true,
         opacity: 1,
-        depthWrite: true,
+        //depthWrite: true,
         polygonOffset: true,
         polygonOffsetFactor: -1, // positive value pushes polygon further away
         polygonOffsetUnits: 1
