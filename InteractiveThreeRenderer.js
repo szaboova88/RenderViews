@@ -117,6 +117,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 
     self.onDocumentKeyDown = function onDocumentKeyDown(event) {
         if ((self.picked) && (event.key == "Alt") || (event.altKey == true)) {
+            console.log(self.picked);
             var node = self.resolveNode(self.picked);
             node.shape.interaction.selected(true);
         }
