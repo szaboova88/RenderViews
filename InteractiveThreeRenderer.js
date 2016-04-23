@@ -141,9 +141,9 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.picked = null;
     //material wich substitutes the default mesh material when a mesh is picked
     self.pickedMaterial = new THREE.MeshBasicMaterial({
-        color: 'purple',
+        color: 'red',
         transparent: true,
-        opacity: 0.4,
+        opacity: 0.9,
         //depthWrite: false,
         polygonOffset: true,
         polygonOffsetFactor: -1, // positive value pushes polygon further away
