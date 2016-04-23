@@ -164,7 +164,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 
     //--------------------------------------------- 
 
-    self.altPickedMaterial = new THREE.LambertBasicMaterial({
+    self.altPickedMaterial = new THREE.MeshLambertMaterial({
         color: 'yellow',
         transparent: true,
         opacity: 1,
