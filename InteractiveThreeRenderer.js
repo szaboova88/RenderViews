@@ -173,7 +173,12 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         polygonOffsetFactor: -1, // positive value pushes polygon further away
         polygonOffsetUnits: 1
     });
-    self.alt1PickedMaterial = new THREE.SpriteMaterial( { color: 'black', fog: true } );
+    
+    self.alt1PickedMaterial = new THREE.LineDashedMaterial({ 
+        color: 'black', 
+        fog: true 
+        
+    });
     //---------------------------------------------
 
     self.newGeometry = new THREE.BoxGeometry(1.2, 1.2, 2);
