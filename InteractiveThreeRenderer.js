@@ -98,7 +98,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 
     self.debugRays = false;
 
-    self.onDocumentKeyDown = function onDocumentKeyDown(event) {
+        self.onDocumentKeyDown = function onDocumentKeyDown(event) {
         console.log('event.key');
         console.log(event.key);
         console.log(self.pickingUnlocked);
@@ -115,13 +115,6 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             }
         }
 
-        //if (event.ctrlKey)
-        //    self.debugRays = true;
-
-        self.Update();
-    };
-
-    self.onDocumentKeyDown = function onDocumentKeyDown(event) {
         if ((self.picked) && (self.pickingUnlocked) && (event.key == "Alt") || (event.altKey == true)) {
             if (self.picked) {
                 console.log(self.picked);
@@ -131,6 +124,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         }
         //if (event.ctrlKey)
         //    self.debugRays = true;
+
         self.Update();
     };
 
