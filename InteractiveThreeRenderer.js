@@ -101,6 +101,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.onDocumentKeyDown = function onDocumentKeyDown(event) {
         if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Shift") || (event.keyIdentifier == "Shift"))) {
             self.pickingUnlocked = false;
+            console.log(self.picked);
             var node = self.resolveNode(self.picked);
             node.shape.interaction.visible(false);
             var parent = node.seed.GetParentShape(node.shape);
@@ -119,6 +120,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.onDocumentKeyDown = function onDocumentKeyDown(event) {
         if ((self.picked) && ((event.key == "Alt") || (event.altKey == true))) {
             if (self.picked) {
+                console.log(self.picked);
                 var node = self.resolveNode(self.picked);
                 node.shape.interaction.selected(false);
             }
