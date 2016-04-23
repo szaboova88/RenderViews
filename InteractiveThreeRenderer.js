@@ -162,6 +162,18 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         polygonOffsetUnits: 1
     });
 
+    //--------------------------------------------- 
+
+    self.altPickedMaterial = new THREE.LambertBasicMaterial({
+        color: 'yellow',
+        transparent: true,
+        opacity: 1,
+        //depthWrite: false,
+        polygonOffset: true,
+        polygonOffsetFactor: -1, // positive value pushes polygon further away
+        polygonOffsetUnits: 1
+    });
+
     //---------------------------------------------
 
     self.newGeometry = new THREE.BoxGeometry(1.2, 1.2, 2);
@@ -256,7 +268,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             var n = self.Meshes[id].clone();
 
             m.material = self.pickedMaterial;
-            g.material = self.pickedMaterial;
+            g.material = self.altPickedMaterial;
             n.material = self.notPickedMaterial;
 
             m.mName = id;
