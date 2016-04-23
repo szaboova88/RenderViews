@@ -57,8 +57,8 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             uniforms: {tDiffuse: {type: "t", value: this.basicRTT}},
             vertexShader: fsqVertex,
             fragmentShader: fsqFragment,
-            depthTest: false,
-            depthWrite: false
+            depthTest: true,
+            depthWrite: true
         });
 
         var quad = new THREE.Mesh(this.RTTPlane, this.fullScreenQuadMaterial);
@@ -156,7 +156,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         color: 'black',
         transparent: true,
         opacity: 1,
-        //depthWrite: false,
+        depthWrite: true,
         polygonOffset: true,
         polygonOffsetFactor: -1, // positive value pushes polygon further away
         polygonOffsetUnits: 1
