@@ -99,9 +99,13 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.debugRays = false;
 
     self.onDocumentKeyDown = function onDocumentKeyDown(event) {
-        if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Shift") || (event.keyIdentifier == "Shift"))) {
+        console.log('event.key');
+        console.log(event.key);
+        console.log(self.pickingUnlocked);
+        console.log(self.picked);
+        if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Shift") || (event.shiftKey))) {
             self.pickingUnlocked = false;
-            console.log(self.picked);
+            console.log('((event.key == "Shift") || (event.shiftKey))');
             var node = self.resolveNode(self.picked);
             node.shape.interaction.visible(false);
             var parent = node.seed.GetParentShape(node.shape);
@@ -118,11 +122,11 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     };
 
     self.onDocumentKeyDown = function onDocumentKeyDown(event) {
-        if ((self.picked) && ((event.key == "Alt") || (event.altKey == true))) {
+        if ((self.picked) && (self.pickingUnlocked) && (event.key == "Alt") || (event.altKey == true)) {
             if (self.picked) {
                 console.log(self.picked);
                 var node = self.resolveNode(self.picked);
-                node.shape.interaction.selected(false);
+                node.shape.interaction.selected(true);
             }
         }
         //if (event.ctrlKey)
