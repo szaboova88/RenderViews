@@ -25,6 +25,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 
     self.IMeshes = {};
     self.NMeshes = {};
+    self.GMeshes = {};
 
     self.resolveNode = function (mesh) {
         var shapeID = mesh.mName;
@@ -117,9 +118,10 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 
     self.onDocumentKeyDown = function onDocumentKeyDown(event) {
         if ((self.picked) && (event.key == "Alt") || (event.altKey == true)) {
-            console.log(self.picked);
-            var node = self.resolveNode(self.picked);
-            node.shape.interaction.selected(true);
+            if (self.picked) {
+                var node = self.resolveNode(self.picked);
+                node.shape.interaction.selected(true);
+            }
         }
         //if (event.ctrlKey)
         //    self.debugRays = true;
@@ -252,13 +254,13 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.addCalls.push(function (shape) {
 
             var id = shape.id;
-            console.log(self);
             //if (!self.Meshes.hasOwnProperty(id))
             var m = self.Meshes[id].clone();
             var n = self.Meshes[id].clone();
-            console.log(m);
-            console.log(n);
+            var g = self.Meshes[id].clone();
+
             m.material = self.pickedMaterial;
+            g.material = self.pickedMaterial;
             n.material = self.notPickedMaterial;
 
             m.mName = id;
@@ -267,8 +269,8 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             //console.log('self.newGeometry');
             //console.log(self.newGeometry);
             //m.geometry = self.newGeometry;
-            m.scale.set(1.5, 1.5, 1.5);
-            m.matrixAutoUpdate = true;
+            g.scale.set(1.5, 1.5, 1.5);
+            g.matrixAutoUpdate = true;
 
             console.log(m);
             console.log(n);
@@ -280,10 +282,12 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 
             self.IMeshes[id] = m;
             self.NMeshes[id] = n;
+            self.GMeshes[id] = g;
 
             if (shape.interaction.visible()) {
                 self.rayScene.add(m);
                 self.rayScene.add(n);
+                self.rayScene.add(g);
             }
 
             var pickSubscription = shape.interaction.picked.subscribe(function (newVal) {
