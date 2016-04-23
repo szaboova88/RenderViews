@@ -152,10 +152,10 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 
     //---------------------------------------------
 
-    self.notPickedMaterial = new THREE.MeshBasicMaterial({
+    self.notPickedMaterial = new THREE.MeshDephtMaterial({
         color: 'black',
         transparent: true,
-        opacity: 0.4,
+        opacity: 1,
         //depthWrite: false,
         polygonOffset: true,
         polygonOffsetFactor: -1, // positive value pushes polygon further away
