@@ -101,10 +101,10 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         if ((self.picked) && (self.pickingUnlocked) && ((event.key == "Shift") || (event.keyIdentifier == "Shift"))) {
             self.pickingUnlocked = false;
             var node = self.resolveNode(self.picked);
-            node.shape.interaction.visible(false, "myValueVisible");
+            node.shape.interaction.visible(false);
             var parent = node.seed.GetParentShape(node.shape);
             if (parent) {
-                parent.interaction.visible(true, "myValueVisible");
+                parent.interaction.visible(true);
                 self.highlighted.push(parent);
             }
         }
@@ -114,11 +114,11 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 
         self.Update();
     };
-    
+
     self.onDocumentKeyDown = function onDocumentKeyDown(event) {
         if ((self.picked) && (event.key == "Alt") || (event.altKey == true)) {
             var node = self.resolveNode(self.picked);
-            node.shape.interaction.selected(true, "myValueVisible");
+            node.shape.interaction.selected(true);
         }
         //if (event.ctrlKey)
         //    self.debugRays = true;
@@ -127,11 +127,11 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 
     self.onDocumentKeyUp = function onDocumentKeyUp(event) {
         while (self.highlighted.length > 0) {
-            self.highlighted.pop().interaction.visible(false, "myValueVisible");
+            self.highlighted.pop().interaction.visible(false);
         }
         if (!self.pickingUnlocked) {
             var node = self.resolveNode(self.picked);
-            node.shape.interaction.visible(true, "myValueVisible");
+            node.shape.interaction.visible(true);
             self.pickingUnlocked = true;
         }
         //self.debugRays = false;
@@ -227,19 +227,19 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                         var seed = SeedWidgets.GetById(seedID);
                         var shape = seed.GetShape(shapeID);
                         //Use Knockout to unset the picked state of the shape
-                        shape.interaction.picked(false, "myValuePicked");
+                        shape.interaction.picked(false);
                     }
                     //Store reference to closest mesh as current intersection mesh
                     this.picked = intersects[0].object;
                     //The same as above but compressed into a single line
-                    SeedWidgets.GetById(this.Seeds[this.picked.mName]).GetShape(this.picked.mName).interaction.picked(true, "myValuePicked");
+                    SeedWidgets.GetById(this.Seeds[this.picked.mName]).GetShape(this.picked.mName).interaction.picked(true);
                 }
             }
             else //There are no intersections
             {
                 //Use Knockout to unset the picked state of the shape
                 if (this.picked)
-                    SeedWidgets.GetById(this.Seeds[this.picked.mName]).GetShape(this.picked.mName).interaction.picked(false, "myValuePicked");
+                    SeedWidgets.GetById(this.Seeds[this.picked.mName]).GetShape(this.picked.mName).interaction.picked(false);
                 //Remove previous intersection mesh reference by setting current intersection object to null
                 this.picked = null;
             }
@@ -285,9 +285,8 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                 self.rayScene.add(n);
             }
 
-            var pickSubscription = shape.interaction.picked.subscribe(function (newVal, bbbb) {
+            var pickSubscription = shape.interaction.picked.subscribe(function (newVal) {
                 var mesh = this.IMeshes[id]; //get the mesh for the shape
-                console.log(bbbb);
                 if (mesh) {
                     if (newVal) {
                         //this.interactiveScene.add(this.NMeshes[6]);
