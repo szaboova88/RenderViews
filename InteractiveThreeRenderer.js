@@ -152,7 +152,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 
     //---------------------------------------------
 
-    self.notPickedMaterial = new THREE.MeshDepthMaterial({
+    self.notPickedMaterial = new THREE.MeshLambertMaterial({
         color: 'black',
         transparent: true,
         opacity: 1,
@@ -174,7 +174,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         polygonOffsetUnits: 1
     });
     
-    self.alt1PickedMaterial = new THREE.LineDashedMaterial({ 
+    self.not1PickedMaterial = new THREE.LineDashedMaterial({ 
         color: 'black', 
         fog: true 
         
@@ -273,8 +273,8 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             var n = self.Meshes[id].clone();
 
             m.material = self.pickedMaterial;
-            g.material = self.alt1PickedMaterial;
-            n.material = self.notPickedMaterial;
+            g.material = self.altPickedMaterial;
+            n.material = self.not1PickedMaterial;
 
             m.mName = id;
             g.mName = id;
