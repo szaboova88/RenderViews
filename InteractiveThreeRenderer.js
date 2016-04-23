@@ -114,6 +114,16 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 
         self.Update();
     };
+    
+    self.onDocumentKeyDown = function onDocumentKeyDown(event) {
+        if ((self.picked) && (event.key == "Alt") || (event.altKey == true)) {
+            var node = self.resolveNode(self.picked);
+            node.shape.interaction.selected(true, "myValueVisible");
+        }
+        //if (event.ctrlKey)
+        //    self.debugRays = true;
+        self.Update();
+    };
 
     self.onDocumentKeyUp = function onDocumentKeyUp(event) {
         while (self.highlighted.length > 0) {
