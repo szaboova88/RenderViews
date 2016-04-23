@@ -117,10 +117,10 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     };
 
     self.onDocumentKeyDown = function onDocumentKeyDown(event) {
-        if ((self.picked) && (event.key == "Alt") || (event.altKey == true)) {
+        if ((self.picked) && (self.pickingUnlocked) && (event.key == "Alt") || (event.altKey == true)) {
             if (self.picked) {
                 var node = self.resolveNode(self.picked);
-                node.shape.interaction.selected(true);
+                node.shape.interaction.selected(false);
             }
         }
         //if (event.ctrlKey)
