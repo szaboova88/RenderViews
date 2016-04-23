@@ -57,8 +57,8 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             uniforms: {tDiffuse: {type: "t", value: this.basicRTT}},
             vertexShader: fsqVertex,
             fragmentShader: fsqFragment,
-            depthTest: true,
-            depthWrite: true
+            depthTest: false,
+            depthWrite: false
         });
 
         var quad = new THREE.Mesh(this.RTTPlane, this.fullScreenQuadMaterial);
