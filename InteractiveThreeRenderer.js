@@ -152,7 +152,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 
     //---------------------------------------------
 
-    self.notPickedMaterial = new THREE.MeshDephtMaterial({
+    self.notPickedMaterial = new THREE.MeshDepthMaterial({
         color: 'black',
         transparent: true,
         opacity: 1,
