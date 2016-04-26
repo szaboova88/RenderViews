@@ -98,7 +98,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             
             
         	if($("#blur_effect").is(':checked')) {
-        		alert('checked');
+        		console.log('checked');
         	} else {
             		console.log('nope');
         	}
