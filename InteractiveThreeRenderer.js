@@ -19,7 +19,8 @@ var fsqFragment =
 function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
     //inherit the base class
     var self = new BasicThreeRenderer(domQuery, true);
-
+    
+    self.composer = null;
     self.interactiveScene = null;
     self.rayScene = null;
 
@@ -65,6 +66,34 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         quad.dynamic = true;
         quad.position.z = -1;
         this.fsqScene.add(quad);
+        
+        //POSTPROCESING
+        
+        this.composer = new THREE.EffectComposer( this.renderer );
+		this.composer.addPass( new THREE.RenderPass( this.rayScene, this.camera ) );
+		
+		
+		
+		
+		        var hTilt = new THREE.ShaderPass(THREE.HorizontalTiltShiftShader);
+		       
+        //hTilt.enabled = false;
+        //hTilt.uniforms.h.value = 1 / window.innerHeight;
+                var vTilt = new THREE.ShaderPass(THREE.VerticalTiltShiftShader);
+                
+        //vTilt.enabled = false;
+        //vTilt.uniforms.v.value = 1 / window.innerWidth;
+		
+		//hTilt.renderToScreen = true;
+    		vTilt.renderToScreen = true;
+    		this.composer.addPass( hTilt );
+    		this.composer.addPass( vTilt );
+		
+		
+		
+        
+        
+        
     });
 
     self.InteractiveRender = function () {
@@ -72,6 +101,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             this.renderer.clear(true, false, false);
             this.renderer.render(this.fsqScene, this.RTTCamera);
             this.renderer.render(self.debugRays ? this.rayScene : this.interactiveScene, this.camera);
+            this.composer.render();
         }
     };
 
