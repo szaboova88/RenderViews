@@ -20,6 +20,8 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     //inherit the base class
     var self = new BasicThreeRenderer(domQuery, true);
     
+    $("#blur_effect").attr("checked") ? alert("Checked") : alert("Unchecked");
+    
     self.composer = null;
     self.interactiveScene = null;
     self.rayScene = null;
