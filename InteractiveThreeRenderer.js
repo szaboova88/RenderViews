@@ -70,30 +70,19 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         //POSTPROCESING
         
         this.composer = new THREE.EffectComposer( this.renderer );
-		this.composer.addPass( new THREE.RenderPass( this.rayScene, this.camera ) );
+	this.composer.addPass( new THREE.RenderPass( this.rayScene, this.camera ) );
 		
-		
-		
-		
-		        var hTilt = new THREE.ShaderPass(THREE.HorizontalTiltShiftShader);
-		       
-        //hTilt.enabled = false;
-        //hTilt.uniforms.h.value = 1 / window.innerHeight;
-                var vTilt = new THREE.ShaderPass(THREE.VerticalTiltShiftShader);
-                
-        //vTilt.enabled = false;
-        //vTilt.uniforms.v.value = 1 / window.innerWidth;
-		
-		//hTilt.renderToScreen = true;
-    		vTilt.renderToScreen = true;
-    		this.composer.addPass( hTilt );
-    		this.composer.addPass( vTilt );
-		
-		
-		
+	var hTilt = new THREE.ShaderPass(THREE.HorizontalTiltShiftShader);
+        hTilt.uniforms.h.value = 1 / window.innerHeight;
         
+        var vTilt = new THREE.ShaderPass(THREE.VerticalTiltShiftShader);
+        vTilt.uniforms.v.value = 1 / window.innerWidth;
         
-        
+	//hTilt.renderToScreen = true;
+    	vTilt.renderToScreen = true;
+    	this.composer.addPass( hTilt );
+    	this.composer.addPass( vTilt );
+
     });
 
     self.InteractiveRender = function () {
