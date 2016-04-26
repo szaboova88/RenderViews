@@ -94,7 +94,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             this.renderer.clear(true, false, false);
             this.renderer.render(this.fsqScene, this.RTTCamera);
             this.renderer.render(self.debugRays ? this.rayScene : this.interactiveScene, this.camera);
-            this.composer.render();
+           // this.composer.render();
             
             
         	if($("#blur_effect").is(':checked')) {
