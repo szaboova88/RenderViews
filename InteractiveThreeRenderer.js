@@ -96,7 +96,12 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             this.renderer.render(self.debugRays ? this.rayScene : this.interactiveScene, this.camera);
             this.composer.render();
             
-            $("#blur_effect").attr("checked") ? alert("Checked") : alert("Unchecked");
+            
+        	if($("#blur_effect").is(':checked')) {
+        		alert('checked');
+        	} else {
+            		console.log('nope');
+        	}
         }
     };
 
