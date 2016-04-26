@@ -85,7 +85,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     	this.composer.addPass( hTilt );
     	this.composer.addPass( vTilt );
     	
-       $("#blur_effect").attr("checked") ? alert("Checked") : alert("Unchecked");
+       
 
     });
 
@@ -95,6 +95,8 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             this.renderer.render(this.fsqScene, this.RTTCamera);
             this.renderer.render(self.debugRays ? this.rayScene : this.interactiveScene, this.camera);
             this.composer.render();
+            
+            $("#blur_effect").attr("checked") ? alert("Checked") : alert("Unchecked");
         }
     };
 
