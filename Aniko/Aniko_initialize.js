@@ -1,9 +1,3 @@
 RenderWidgets.Add3DRenderer(new InteractiveThreeRenderer('#basicRendererContainer'));
 
-  alert('tusom');
-    $('#clone-button').html('kokotina');
-    $('#clone-button').prop('value', 'Save');    
-    
-    $('#parse-button').click(function() {
-        alert( "Handler for .click() called." );
-    });
+$('#grammar-group').append('<div><input type="checkbox" id="blur_effect" name="blureffects" value="Blur"><label for="blur_effect">Blur</label></div>');
