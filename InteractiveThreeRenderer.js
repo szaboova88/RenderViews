@@ -70,7 +70,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         //POSTPROCESING
         
         this.composer = new THREE.EffectComposer( this.renderer );
-	this.composer.addPass( new THREE.RenderPass( this.interactiveScene, this.camera ) );
+	this.composer.addPass( new THREE.RenderPass( this.fsqScene, this.RTTCamera ) );
 		
 	var hTilt = new THREE.ShaderPass(THREE.HorizontalTiltShiftShader);
         hTilt.uniforms.h.value = 1 / window.innerHeight;
