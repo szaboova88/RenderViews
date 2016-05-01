@@ -380,7 +380,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                         this.interactiveScene.add(mesh);
                     } else {
                         if (shape.interaction.visible()) {
-                            this.interactiveScene.add(mesh);
+                            this.fsqScene.add(mesh);
                         } else {
                             this.interactiveScene.remove(mesh);
                         }
