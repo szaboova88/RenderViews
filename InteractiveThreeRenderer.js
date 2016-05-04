@@ -75,7 +75,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
 	this.composer.addPass( new THREE.RenderPass( this.fsqScene, this.RTTCamera ) );
 		
 	var hTilt = new THREE.ShaderPass(THREE.HorizontalTiltShiftShader);
-        hTilt.uniforms.h.value = 1 / window.self.container.innerHeight
+        hTilt.uniforms.h.value = 1 / window.self.container.innerHeight;
         
         var vTilt = new THREE.ShaderPass(THREE.VerticalTiltShiftShader);
         vTilt.uniforms.v.value = 1 / window.self.container.innerWidth;
