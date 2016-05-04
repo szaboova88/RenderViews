@@ -144,6 +144,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             self.pickingUnlocked = false;
             if (self.picked) {
                 var node = self.resolveNode(self.picked);
+                console.log(node);
                 node.shape.interaction.selected(true);
             }
         }
