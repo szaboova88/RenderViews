@@ -310,6 +310,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             //console.log(self.newGeometry);
             //m.geometry = self.newGeometry;
             g.scale.set(1.5, 1.5, 1.5);
+            g.rotation.set(new THREE.Vector3( 0, 0, Math.PI / 2));
             g.matrixAutoUpdate = true;
 
             console.log(m);
