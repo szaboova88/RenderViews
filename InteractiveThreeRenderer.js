@@ -19,12 +19,13 @@ var fsqFragment =
 function InteractiveThreeRenderer(domQuery) { //for a whole window call with domQuery "<body>"
     //inherit the base class
     var self = new BasicThreeRenderer(domQuery, true);
-    
 
-    
+
     self.composer = null;
     self.interactiveScene = null;
     self.rayScene = null;
+
+    self.showSameRule = false;
 
     self.IMeshes = {};
     self.NMeshes = {};
@@ -68,24 +69,23 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         quad.dynamic = true;
         quad.position.z = -1;
         this.fsqScene.add(quad);
-        
+
         //POSTPROCESING
-        
-        this.composer = new THREE.EffectComposer( this.renderer );
-	this.composer.addPass( new THREE.RenderPass( this.fsqScene, this.RTTCamera ) );
-		
-	var hTilt = new THREE.ShaderPass(THREE.HorizontalTiltShiftShader);
+
+        this.composer = new THREE.EffectComposer(this.renderer);
+        this.composer.addPass(new THREE.RenderPass(this.fsqScene, this.RTTCamera));
+
+        var hTilt = new THREE.ShaderPass(THREE.HorizontalTiltShiftShader);
         hTilt.uniforms.h.value = 1 / window.innerHeight;
-        
+
         var vTilt = new THREE.ShaderPass(THREE.VerticalTiltShiftShader);
         vTilt.uniforms.v.value = 1 / window.innerWidth;
-        
-	//hTilt.renderToScreen = true;
-    	vTilt.renderToScreen = true;
-    	this.composer.addPass( hTilt );
-    	this.composer.addPass( vTilt );
-    	
-       
+
+        //hTilt.renderToScreen = true;
+        vTilt.renderToScreen = true;
+        this.composer.addPass(hTilt);
+        this.composer.addPass(vTilt);
+
 
     });
 
@@ -94,14 +94,20 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             this.renderer.clear(true, false, false);
             this.renderer.render(this.fsqScene, this.RTTCamera);
             this.renderer.render(self.debugRays ? this.rayScene : this.interactiveScene, this.camera);
-           // this.composer.render();
-            
-            
-        	if($("#blur_effect").is(':checked')) {
-        		this.composer.render();
-        	} else {
-            		// not checked
-        	}
+            // this.composer.render();
+
+
+            if ($("#blur_effect").is(':checked')) {
+                this.composer.render();
+            } else {
+                // not checked
+            }
+
+            if ($("#show_same_rule").is(':checked')) {
+                this.showSameRule = true;
+            } else {
+                this.showSameRule = false;
+            }
         }
     };
 
@@ -193,7 +199,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         polygonOffsetUnits: 1
     });
 
-    //--------------------------------------------- 
+    //---------------------------------------------
 
     self.altPickedMaterial = new THREE.MeshLambertMaterial({
         color: 'yellow',
@@ -204,7 +210,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         polygonOffsetFactor: -1, // positive value pushes polygon further away
         polygonOffsetUnits: 1
     });
-    
+
     //---------------------------------------------
 
     self.newGeometry = new THREE.BoxGeometry(1.2, 1.2, 2);
@@ -336,11 +342,28 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                 var mesh = this.IMeshes[id]; //get the mesh for the shape
                 if (mesh) {
                     if (newVal) {
-                        //this.interactiveScene.add(this.NMeshes[6]);
-                        for (var item in this.NMeshes) {
-                            if (item != id) {
-                                if (this.NMeshes[item].parent) {
-                                    this.interactiveScene.add(this.NMeshes[item]);
+
+                        if (this.showSameRule) {
+                            var mainNode = this.resolveNode(mesh);
+                            console.log('node');
+                            console.log(mainNode.shape.relations.rule);
+                            for (var item in this.NMeshes) {
+                                if (item != id) {
+                                    if (this.NMeshes[item].parent) {
+                                        var tmpNode = this.resolveNode(this.NMeshes[item]);
+                                        if (mainNode.shape.relations.rule == tmpNode.shape.relations.rule) {
+                                            this.interactiveScene.add(this.NMeshes[item]);
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            //this.interactiveScene.add(this.NMeshes[6]);
+                            for (var item in this.NMeshes) {
+                                if (item != id) {
+                                    if (this.NMeshes[item].parent) {
+                                        this.interactiveScene.add(this.NMeshes[item]);
+                                    }
                                 }
                             }
                         }
@@ -371,6 +394,8 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                     //this.RenderSingleFrame();
                     self.InteractiveRender();
                 }
+
+
             }.bind(self));
 
             var selectSubscription = shape.interaction.selected.subscribe(function (newVal) {
