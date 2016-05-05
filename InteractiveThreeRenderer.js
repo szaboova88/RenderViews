@@ -347,17 +347,29 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                     console.log(mainNode.shape.relations.rule);
 
                     if (newVal) {
-                        //this.interactiveScene.add(this.NMeshes[6]);
-                        for (var item in this.NMeshes) {
-                            if (item != id) {
-                                if (this.NMeshes[item].parent) {
-                                    var tmpNode = this.resolveNode(this.NMeshes[item]);
-                                    if(mainNode.shape.relations.rule == tmpNode.shape.relations.rule) {
+
+                        if (this.showSameRule) {
+                            //this.interactiveScene.add(this.NMeshes[6]);
+                            for (var item in this.NMeshes) {
+                                if (item != id) {
+                                    if (this.NMeshes[item].parent) {
+                                        var tmpNode = this.resolveNode(this.NMeshes[item]);
+                                        if (mainNode.shape.relations.rule == tmpNode.shape.relations.rule) {
+                                            this.interactiveScene.add(this.NMeshes[item]);
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            for (var item in this.NMeshes) {
+                                if (item != id) {
+                                    if (this.NMeshes[item].parent) {
                                         this.interactiveScene.add(this.NMeshes[item]);
                                     }
                                 }
                             }
                         }
+
                         this.interactiveScene.add(mesh);
                     } else {
                         if (shape.interaction.visible()) {
