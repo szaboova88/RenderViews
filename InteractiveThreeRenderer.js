@@ -30,6 +30,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.IMeshes = {};
     self.NMeshes = {};
     self.GMeshes = {};
+    self.SMeshes = {};
 
     self.resolveNode = function (mesh) {
         var shapeID = mesh.mName;
@@ -203,6 +204,16 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         polygonOffsetUnits: 1
     });
 
+    self.siblingsMaterial = new THREE.MeshLambertMaterial({
+        color: '#990000',
+        transparent: true,
+        opacity: 1,
+        //depthWrite: false,
+        polygonOffset: true,
+        polygonOffsetFactor: -1, // positive value pushes polygon further away
+        polygonOffsetUnits: 1
+    });
+
     //---------------------------------------------
 
     self.newGeometry = new THREE.BoxGeometry(1.2, 1.2, 2);
@@ -211,11 +222,11 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.updateCalls.push(function () {
         //For an excellent explanation of the following few lines, please refer to
         //http://stackoverflow.com/questions/11036106/three-js-projector-and-ray-objects
-            if ($("#show_same_rule").is(':checked')) {
-                this.showSameRule = true;
-            } else {
-                this.showSameRule = false;
-            }
+        if ($("#show_same_rule").is(':checked')) {
+            this.showSameRule = true;
+        } else {
+            this.showSameRule = false;
+        }
 
 
         this.interactiveScene.updateMatrixWorld();
@@ -301,14 +312,17 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             var m = self.Meshes[id].clone();
             var g = self.Meshes[id].clone();
             var n = self.Meshes[id].clone();
+            var s = self.Meshes[id].clone();
 
             m.material = self.pickedMaterial;
             g.material = self.altPickedMaterial;
             n.material = self.notPickedMaterial;
+            s.material = self.siblingsMaterial;
 
             m.mName = id;
             g.mName = id;
             n.mName = id;
+            s.mName = id;
 
             //console.log('self.newGeometry');
             //console.log(self.newGeometry);
@@ -329,11 +343,13 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             self.IMeshes[id] = m;
             self.GMeshes[id] = g;
             self.NMeshes[id] = n;
+            self.SMeshes[id] = s;
 
             if (shape.interaction.visible()) {
                 self.rayScene.add(m);
                 self.rayScene.add(g);
                 self.rayScene.add(n);
+                self.rayScene.add(s);
             }
 
             var pickSubscription = shape.interaction.picked.subscribe(function (newVal) {
@@ -343,12 +359,12 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                     if (newVal) {
                         if (this.showSameRule) {
                             //this.interactiveScene.add(this.NMeshes[6]);
-                            for (var item in this.IMeshes) {
+                            for (var item in this.SMeshes) {
                                 if (item != id) {
-                                    if (this.IMeshes[item].parent) {
-                                        var tmpNode = this.resolveNode(this.IMeshes[item]);
+                                    if (this.SMeshes[item].parent) {
+                                        var tmpNode = this.resolveNode(this.SMeshes[item]);
                                         if (mainNode.shape.relations.rule == tmpNode.shape.relations.rule) {
-                                            this.interactiveScene.add(this.IMeshes[item]);
+                                            this.interactiveScene.add(this.SMeshes[item]);
                                         }
                                     }
                                 }
@@ -368,10 +384,10 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                             //this.rayScene.add(this.NMeshes[6]);
                             this.rayScene.add(mesh);
                             if (this.showSameRule) {
-                                for (var item in this.IMeshes) {
+                                for (var item in this.SMeshes) {
                                     if (item != id) {
-                                        if (this.IMeshes[item].parent) {
-                                            this.rayScene.add(this.IMeshes[item]);
+                                        if (this.SMeshes[item].parent) {
+                                            this.rayScene.add(this.SMeshes[item]);
                                         }
                                     }
                                 }
@@ -388,10 +404,10 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                             this.interactiveScene.remove(mesh);
                             //this.interactiveScene.remove(this.NMeshes[6]);
                             if (this.showSameRule) {
-                                for (var item in this.IMeshes) {
+                                for (var item in this.SMeshes) {
                                     if (item != id) {
-                                        if (this.IMeshes[item].parent) {
-                                            this.interactiveScene.remove(this.IMeshes[item]);
+                                        if (this.SMeshes[item].parent) {
+                                            this.interactiveScene.remove(this.SMeshes[item]);
                                         }
                                     }
                                 }
