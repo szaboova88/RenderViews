@@ -95,6 +95,11 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             this.renderer.render(this.fsqScene, this.RTTCamera);
             this.renderer.render(self.debugRays ? this.rayScene : this.interactiveScene, this.camera);
             // this.composer.render();
+            if ($("#blur_effect").is(':checked')) {
+                this.composer.render();
+            } else {
+                // not checked
+            }
         }
     };
 
@@ -206,12 +211,6 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.updateCalls.push(function () {
         //For an excellent explanation of the following few lines, please refer to
         //http://stackoverflow.com/questions/11036106/three-js-projector-and-ray-objects
-            if ($("#blur_effect").is(':checked')) {
-                this.composer.render();
-            } else {
-                // not checked
-            }
-
             if ($("#show_same_rule").is(':checked')) {
                 this.showSameRule = true;
             } else {
