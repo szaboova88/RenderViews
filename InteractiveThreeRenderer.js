@@ -143,7 +143,6 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             self.pickingUnlocked = false;
             if (self.picked) {
                 var node = self.resolveNode(self.picked);
-                console.log(node);
                 node.shape.interaction.selected(true);
             }
         }
@@ -324,21 +323,10 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             n.mName = id;
             s.mName = id;
 
-            //console.log('self.newGeometry');
-            //console.log(self.newGeometry);
             //m.geometry = self.newGeometry;
             g.scale.set(1.5, 1.5, 1.5);
             //g.rotation.set(new THREE.Vector3( 0, 0, Math.PI / 2, 'XYZ'));
             g.matrixAutoUpdate = true;
-
-            console.log(m);
-            console.log(g);
-            console.log(n);
-            console.log(id);
-            console.log('self.IMeshes');
-            console.log(self.IMeshes);
-            console.log('self.NMeshes');
-            console.log(self.NMeshes);
 
             self.IMeshes[id] = m;
             self.GMeshes[id] = g;
@@ -428,7 +416,6 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             }.bind(self));
 
             var selectSubscription = shape.interaction.selected.subscribe(function (newVal) {
-                console.log('selectSubscription');
                 var mesh = this.GMeshes[id]; //get the mesh for the shape
                 if (mesh) {
                     if (newVal) {
@@ -463,7 +450,6 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.removeCalls.push(function (shape) {
         //very similar to RemoveSeedSubscription
         var id = shape.id;
-        console.log(id);
         if (self.IMeshes.hasOwnProperty(id)) {
             self.rayScene.remove(self.IMeshes[id]);
             self.interactiveScene.remove(self.IMeshes[id]);
