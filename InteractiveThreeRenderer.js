@@ -347,12 +347,12 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                             var mainNode = this.resolveNode(mesh);
                             console.log('node');
                             console.log(mainNode.shape.relations.rule);
-                            for (var item in this.NMeshes) {
+                            for (var item in this.IMeshes) {
                                 if (item != id) {
-                                    if (this.NMeshes[item].parent) {
-                                        var tmpNode = this.resolveNode(this.NMeshes[item]);
+                                    if (this.IMeshes[item].parent) {
+                                        var tmpNode = this.resolveNode(this.IMeshes[item]);
                                         if (mainNode.shape.relations.rule == tmpNode.shape.relations.rule) {
-                                            this.interactiveScene.add(this.NMeshes[item]);
+                                            this.interactiveScene.add(this.IMeshes[item]);
                                         }
                                     }
                                 }
