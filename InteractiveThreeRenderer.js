@@ -205,7 +205,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     });
 
     self.siblingsMaterial = new THREE.MeshLambertMaterial({
-        color: '#990000',
+        color: '#660000',
         transparent: true,
         opacity: 1,
         //depthWrite: false,
