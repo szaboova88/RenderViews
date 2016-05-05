@@ -339,80 +339,44 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             }
 
             var pickSubscription = shape.interaction.picked.subscribe(function (newVal) {
-
-
                 var mesh = this.IMeshes[id]; //get the mesh for the shape
                 if (mesh) {
 
-                    if (this.showSameRule) {
-                        if (newVal) {
-                            var mainNode = this.resolveNode(mesh);
-                            console.log('node');
-                            console.log(mainNode.shape.relations.rule);
-                            for (var item in this.IMeshes) {
-                                if (item != id) {
-                                    if (this.IMeshes[item].parent) {
-                                        var tmpNode = this.resolveNode(this.IMeshes[item]);
-                                        if (mainNode.shape.relations.rule == tmpNode.shape.relations.rule) {
-                                            this.interactiveScene.add(this.IMeshes[item]);
-                                        }
-                                    }
-                                }
-                            }
-                            this.interactiveScene.add(mesh);
-                        } else {
-                            if (shape.interaction.visible()) {
-                                //this.rayScene.add(this.NMeshes[6]);
-                                this.rayScene.add(mesh);
-                                for (var item in this.IMeshes) {
-                                    if (item != id) {
-                                        if (this.IMeshes[item].parent) {
-                                            this.rayScene.add(this.IMeshes[item]);
-                                        }
-                                    }
-                                }
-                            } else {
-                                this.interactiveScene.remove(mesh);
-                                //this.interactiveScene.remove(this.NMeshes[6]);
-                                for (var item in this.IMeshes) {
-                                    if (item != id) {
-                                        if (this.IMeshes[item].parent) {
-                                            this.interactiveScene.remove(this.IMeshes[item]);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        if (newVal) {
-                            //this.interactiveScene.add(this.NMeshes[6]);
-                            for (var item in this.NMeshes) {
-                                if (item != id) {
-                                    if (this.NMeshes[item].parent) {
+                    var mainNode = this.resolveNode(mesh);
+                    console.log('node');
+                    console.log(mainNode.shape.relations.rule);
+
+                    if (newVal) {
+                        //this.interactiveScene.add(this.NMeshes[6]);
+                        for (var item in this.NMeshes) {
+                            if (item != id) {
+                                if (this.NMeshes[item].parent) {
+                                    var tmpNode = this.resolveNode(this.NMeshes[item]);
+                                    if(mainNode.shape.relations.rule == tmpNode.shape.relations.rule) {
                                         this.interactiveScene.add(this.NMeshes[item]);
                                     }
                                 }
                             }
-                            this.interactiveScene.add(mesh);
-                        } else {
-                            if (shape.interaction.visible()) {
-                                //this.rayScene.add(this.NMeshes[6]);
-                                this.rayScene.add(mesh);
-                                for (var item in this.NMeshes) {
-                                    if (item != id) {
-                                        if (this.NMeshes[item].parent) {
-                                            this.rayScene.add(this.NMeshes[item]);
-                                        }
+                        }
+                        this.interactiveScene.add(mesh);
+                    } else {
+                        if (shape.interaction.visible()) {
+                            //this.rayScene.add(this.NMeshes[6]);
+                            this.rayScene.add(mesh);
+                            for (var item in this.NMeshes) {
+                                if (item != id) {
+                                    if (this.NMeshes[item].parent) {
+                                        this.rayScene.add(this.NMeshes[item]);
                                     }
                                 }
-                            } else {
-                                this.interactiveScene.remove(mesh);
-                                //this.interactiveScene.remove(this.NMeshes[6]);
-                                for (var item in this.NMeshes) {
-                                    if (item != id) {
-                                        if (this.NMeshes[item].parent) {
-                                            this.interactiveScene.remove(this.NMeshes[item]);
-                                        }
+                            }
+                        } else {
+                            this.interactiveScene.remove(mesh);
+                            //this.interactiveScene.remove(this.NMeshes[6]);
+                            for (var item in this.NMeshes) {
+                                if (item != id) {
+                                    if (this.NMeshes[item].parent) {
+                                        this.interactiveScene.remove(this.NMeshes[item]);
                                     }
                                 }
                             }
