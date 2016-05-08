@@ -327,13 +327,30 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             //g.scale.set(1.5, 1.5, 1.5);
             //g.matrix.makeScale(2, 2, 2);
             //g.matrix.multiply(2);
+            ////g.matrix.multiplyScalar(2);
+            console.log('g  before');
+            var a = [];
+            a = g.matrix.toArray(a, 1);
+            console.log(a);
+
+            var scale = g.matrix.scale(10);
+            console.log('scale');
+            console.log(scale);
+
+            for (var item in a) {
+                a[item] = a[item]*2;
+            }
+            console.log('a');
+            console.log(a);
+            var aAfterMatrix = g.matrix.fromArray(a);
+            console.log('aAfterMatrix');
+            console.log(aAfterMatrix);
+
+            console.log('g after');
             console.log(g);
-            var g2 = g.matrix.multiplyScalar(2);
-            console.log(g);
-            console.log(g2);
             
             //g.rotation.set(new THREE.Vector3( 0, 0, Math.PI / 2, 'XYZ'));
-            g.matrixAutoUpdate = true;
+            //g.matrixAutoUpdate = true;
             g.updateMatrix();
 
             self.IMeshes[id] = m;
