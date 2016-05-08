@@ -329,20 +329,20 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             //g.matrix.multiply(2);
             //g.matrix.multiplyScalar(2);
             
-            // vytiahnutie si elements, prenasobenie a vytvorenie g matrix z prenasobeneho pola
+            
             console.log(g);
             var a = [];
-            // vytiahneme si do pola
+            
             a = g.matrix.toArray(a, 1);
             console.log(a);
 
-            // prenasobime pole x2
+            
             for (var item in a) {
                 a[item] = a[item]*2;
             }
             console.log('a');
             console.log(a);
-            // pokusime sa vytvorit z pola 
+            
             var aAfterMatrix = g.matrix.fromArray(a);
             console.log('aAfterMatrix');
             console.log(aAfterMatrix);
