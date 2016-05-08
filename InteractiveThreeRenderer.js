@@ -327,25 +327,27 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             //g.scale.set(1.5, 1.5, 1.5);
             //g.matrix.makeScale(2, 2, 2);
             //g.matrix.multiply(2);
-            ////g.matrix.multiplyScalar(2);
-            console.log('g  before');
+            //g.matrix.multiplyScalar(2);
+            
+            // vytiahnutie si elements, prenasobenie a vytvorenie g matrix z prenasobeneho pola
+            console.log(g);
             var a = [];
+            // vytiahneme si do pola
             a = g.matrix.toArray(a, 1);
             console.log(a);
 
-            var scale = g.matrix.scale(10);
-            console.log('scale');
-            console.log(scale);
-
+            // prenasobime pole x2
             for (var item in a) {
                 a[item] = a[item]*2;
             }
             console.log('a');
             console.log(a);
+            // pokusime sa vytvorit z pola 
             var aAfterMatrix = g.matrix.fromArray(a);
             console.log('aAfterMatrix');
             console.log(aAfterMatrix);
 
+            g.matrix = aAfterMatrix;
             console.log('g after');
             console.log(g);
             
