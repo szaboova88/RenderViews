@@ -82,8 +82,8 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         var vTilt = new THREE.ShaderPass(THREE.VerticalTiltShiftShader);
         vTilt.uniforms.v.value = 1 / window.innerWidth;
 
-        hTilt.renderToScreen = true;
-        //vTilt.renderToScreen = true;
+        //hTilt.renderToScreen = true;
+        vTilt.renderToScreen = true;
         this.composer.addPass(hTilt);
         this.composer.addPass(vTilt);
 
