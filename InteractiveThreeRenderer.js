@@ -83,7 +83,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
         vTilt.uniforms.v.value = 1 / window.innerWidth;
 
         hTilt.renderToScreen = true;
-        vTilt.renderToScreen = true;
+        //vTilt.renderToScreen = true;
         this.composer.addPass(hTilt);
         this.composer.addPass(vTilt);
 
