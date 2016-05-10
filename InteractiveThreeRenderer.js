@@ -323,33 +323,34 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             n.mName = id;
             s.mName = id;
 
-            //m.geometry = self.newGeometry;
-            //g.scale.set(1.5, 1.5, 1.5);
+                        //m.geometry = self.newGeometry;
+            g.scale.multiplyScalar(2);
             //g.matrix.makeScale(2, 2, 2);
             //g.matrix.multiply(2);
             //g.matrix.multiplyScalar(2);
             
             
-            console.log(g);
-            var a = [];
+//             console.log(g);
+//             var a = [];
             
-            a = g.matrix.toArray(a, 1);
-            console.log(a);
+//             a = g.matrix.toArray(a, 1);
+//             console.log(a);
 
             
-            for (var item in a) {
-                a[item] = a[item]*2;
-            }
-            console.log('a');
-            console.log(a);
+//             for (var item in a) {
+//                 a[item] = a[item]*2;
+//             }
+//             console.log('a');
+//             console.log(a);
             
-            var aAfterMatrix = g.matrix.fromArray(a);
-            console.log('aAfterMatrix');
-            console.log(aAfterMatrix);
+//             var aAfterMatrix = g.matrix.fromArray(a);
+//             console.log('aAfterMatrix');
+//             console.log(aAfterMatrix);
 
-            g.matrix = aAfterMatrix;
-            console.log('g after');
-            console.log(g);
+//             g.matrix.copy(aAfterMatrix);
+//             g.matrixWorld = aAfterMatrix;
+//             console.log('g after');
+//             console.log(g);
             
             //g.rotation.set(new THREE.Vector3( 0, 0, Math.PI / 2, 'XYZ'));
             //g.matrixAutoUpdate = true;
