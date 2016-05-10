@@ -184,7 +184,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
     self.notPickedMaterial = new THREE.MeshLambertMaterial({
         color: 'black',
         transparent: true,
-        opacity: 0.0,
+        opacity: 0.7,
         //depthWrite: true,
         polygonOffset: true,
         polygonOffsetFactor: -1, // positive value pushes polygon further away
