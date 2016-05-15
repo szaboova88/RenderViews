@@ -241,7 +241,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             //Returns an array containing all objects in the scene with which the ray intersects. Result are ordered by increasing distance from the start of the ray.
             var intersects = ray.intersectObjects(this.picked ? this.rayScene.children.concat([this.picked]) : this.rayScene.children);
 
-            ///////// THIS ALTERNATIVE DOES NOT USE THE KNOCKOUT BINDING (and stays here just for educative purposes, please read it first and compare to the approach used below)
+            ///////// THIS ALTERNATIVE DOES NOT USE THE KNOCKOUT BINDING 
             //If any intersection exists
             /*
              if (intersects.length > 0) {
@@ -323,7 +323,7 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
             n.mName = id;
             s.mName = id;
 
-                        //m.geometry = self.newGeometry;
+
             g.scale.multiplyScalar(2);
             //g.matrix.makeScale(2, 2, 2);
             //g.matrix.multiply(2);
@@ -468,8 +468,6 @@ function InteractiveThreeRenderer(domQuery) { //for a whole window call with dom
                 this.ShapeSubscriptions[id] = {pick: pickSubscription};
                 this.ShapeSubscriptions[id] = {select: selectSubscription};
             }
-
-            //TODO STUDENTS add subscriptions to other shape properties in a similar way
         }
     );
 
